@@ -4449,6 +4449,74 @@ input:focus {
   }
 }
 
+
+/* 0508 fix7f: smartphone landscape side panel real scroll */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  .main,
+  .main[data-stage="measure"],
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"],
+  .main[data-stage="output"] {
+    height: calc(100vh - 72px) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .main .side,
+  .main[data-stage="measure"] .side,
+  .main[data-stage="adjust"] .side,
+  .main[data-stage="dart"] .side,
+  .main[data-stage="confirm"] .side,
+  .main[data-stage="output"] .side {
+    display: block !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    padding-right: 4px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .main .side > .panel {
+    margin-bottom: 7px;
+  }
+
+  .main .canvas,
+  .main[data-stage="measure"] .canvas,
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas,
+  .main[data-stage="output"] .canvas {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 430px) and (max-width: 1000px) {
+  .main,
+  .main[data-stage="measure"],
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"],
+  .main[data-stage="output"] {
+    height: calc(100vh - 42px) !important;
+  }
+
+  .main .side,
+  .main[data-stage="measure"] .side,
+  .main[data-stage="adjust"] .side,
+  .main[data-stage="dart"] .side,
+  .main[data-stage="confirm"] .side,
+  .main[data-stage="output"] .side {
+    padding-bottom: 72px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
@@ -4594,7 +4662,7 @@ const RANGE = {
 };
 
 let state = {
- main: Object.fromEntries(DATA.mainHandles.map(h => [h.id, JSON.parse(JSON.stringify(h.point))])),
+ main: { ...Object.fromEntries(DATA.mainHandles.map(h => [h.id, JSON.parse(JSON.stringify(h.point))])), frontT: JSON.parse(JSON.stringify(DATA.front.points.T)) },
  controlOffset: Object.fromEntries(DATA.controls.map(c => [c.id, { x: 0, y: 0 }])),
  sleeve: JSON.parse(JSON.stringify(SLEEVE_INITIAL)),
 };
@@ -4977,7 +5045,7 @@ function kpUpdateMeasuredViewBoxes() {
  PART_VIEWBOX.dart = kpViewBoxForPoints(body, 36);
 }
 function kpResetInteractiveStateAfterMeasuredBuild() {
- state.main = Object.fromEntries(DATA.mainHandles.map(h => [h.id, JSON.parse(JSON.stringify(h.point))]));
+ state.main = { ...Object.fromEntries(DATA.mainHandles.map(h => [h.id, JSON.parse(JSON.stringify(h.point))])), frontT: JSON.parse(JSON.stringify(DATA.front.points.T)) };
  state.controlOffset = Object.fromEntries(DATA.controls.map(c => [c.id, { x: 0, y: 0 }]));
  state.sleeve = JSON.parse(JSON.stringify(SLEEVE_INITIAL));
  dartState = {
@@ -5012,6 +5080,7 @@ function normalizePartForSleeve(part) {
 
 const MAIN_DELTA_LABELS = {
  bp: 'BP',
+ frontT: '点T',
  frontShoulder: '前肩先',
  backShoulder: '後肩先',
 };
@@ -5126,6 +5195,7 @@ function sleeveDeltaSummaryHtml(keys) {
 function adjustmentRowsForPart(part = currentAdjustPart) {
  if (part === 'front') {
   return [
+   { type: 'main', id: 'frontT', label: '点T', limit: '上下 ±1cm', role: '前中心上端・襟ぐりに反映', info: mainDeltaInfo('frontT') },
    { type: 'main', id: 'bp', label: 'BP', limit: '上下左右 ±3cm', role: '', info: mainDeltaInfo('bp') },
    { type: 'main', id: 'frontShoulder', label: '前肩先', limit: '左右 ±1.2cm / 上下 ±1.5cm', role: '肩線・AHに反映', info: mainDeltaInfo('frontShoulder') },
   ];
@@ -6459,6 +6529,7 @@ function svgPointFromEvent(evt) {
  };
 }
 function initialMain(id) {
+ if (id === 'frontT') return DATA.front.points.T;
  return DATA.mainHandles.find(h => h.id === id).point;
 }
 function initialControl(id) {
@@ -6531,6 +6602,10 @@ function frontDynamicFrame(bpPoint = state.main.bp) {
 }
 function frontEqualXRShift(bpPoint = state.main.bp) {
  return frontDynamicFrame(bpPoint).shift;
+}
+
+function dynamicFrontT() {
+ return state.main && state.main.frontT ? state.main.frontT : DATA.front.points.T;
 }
 function frontMainPoints(bpPoint = state.main.bp) {
  const frame = frontDynamicFrame(bpPoint);
@@ -7098,6 +7173,15 @@ function renderMainHandles() {
   `);
  }
 
+ if (currentAdjustPart === 'front') {
+  const tPt = state.main.frontT || DATA.front.points.T;
+  g.insertAdjacentHTML('beforeend', `
+   <circle class="main-dot" data-main-id="frontT" cx="${r(tPt.x)}" cy="${r(tPt.y)}" r="6.3"/>
+   <circle class="sleeve-hit" data-main-id="frontT" cx="${r(tPt.x)}" cy="${r(tPt.y)}" r="11"/>
+   ${mainDeltaInfo('frontT').moved ? `<text class="delta-text" text-anchor="middle" x="${r(tPt.x)}" y="${r(tPt.y - 14)}"><tspan x="${r(tPt.x)}">${directionLabelY(mainDeltaInfo('frontT').dy)}</tspan></text>` : ''}
+  `);
+}
+ 
  document.querySelectorAll('[data-main-id]').forEach(el => {
   el.addEventListener('pointerdown', (evt) => {
    evt.preventDefault();
@@ -11308,7 +11392,11 @@ function applyDrag(evt) {
   off.y += dy;
   clampControl(dragging.id, off);
  } else if (dragging.type === 'main') {
-  if (dragging.id === 'bp') {
+  if (dragging.id === 'frontT') {
+   const base = initialMain('frontT');
+   state.main.frontT.x = base.x;
+   state.main.frontT.y = clamp(dragging.startPoint.y + dy, base.y - 1 * UNIT, base.y + 1 * UNIT);
+  } else if (dragging.id === 'bp') {
    state.main.bp.x += dx;
    state.main.bp.y += dy;
    clampMain('bp', state.main.bp);
