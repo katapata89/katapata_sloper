@@ -4132,6 +4132,323 @@ input:focus {
   cursor: grabbing;
 }
 
+
+/* 0508 smartphone landscape navigation/panel fix:
+   スマホ横向きで、寸法入力パネルや工程ボタンが見切れて操作不能にならないようにする。 */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .wrap {
+    height: 100vh;
+    padding: 6px;
+    overflow: hidden;
+  }
+
+  .card {
+    height: calc(100vh - 12px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 18px;
+  }
+
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    flex: 0 0 auto;
+    padding: 7px 9px;
+    gap: 6px;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(8px);
+  }
+
+  .brandline {
+    margin-bottom: 4px;
+    gap: 8px;
+  }
+
+  .brandmark {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  h1 {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .note {
+    display: none;
+  }
+
+  .stagebar {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+    margin-top: 4px;
+    padding: 4px 0 2px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    background: rgba(255,255,255,.96);
+  }
+
+  .stagebar .stage {
+    flex: 0 0 auto;
+    min-height: 28px;
+    padding: 0 9px;
+    border-radius: 999px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .main {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 34vw);
+    gap: 8px;
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  .canvas {
+    min-height: 0 !important;
+    height: 100% !important;
+    max-height: none !important;
+    border-radius: 15px;
+  }
+
+  .side {
+    min-height: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 3px;
+    align-content: start;
+    gap: 7px;
+  }
+
+  .panel {
+    padding: 8px 9px;
+    border-radius: 14px;
+  }
+
+  .panelTitleRow {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    margin: -8px -9px 6px;
+    padding: 8px 9px 6px;
+    background: rgba(255,253,248,.97);
+    border-bottom: 1px solid #eee6da;
+    backdrop-filter: blur(6px);
+  }
+
+  .panelTitleRow h2 {
+    font-size: 12px;
+  }
+
+  .sideActions,
+  .outputBackRow,
+  .confirmActionRow,
+  .exportActions,
+  .printActions {
+    position: sticky;
+    bottom: 0;
+    z-index: 35;
+    padding-top: 6px;
+    padding-bottom: 3px;
+    background: linear-gradient(180deg, rgba(255,253,248,0), rgba(255,253,248,.98) 32%);
+  }
+
+  .sideActions button,
+  .outputBackRow button,
+  .confirmActionRow button,
+  .exportActions button,
+  .printActions button,
+  .panelTopAction,
+  .miniReset,
+  .pointReset {
+    min-height: 28px;
+    height: 28px;
+    border-radius: 11px;
+    padding: 0 8px;
+    font-size: 9.5px;
+  }
+
+  .parttabs {
+    position: sticky;
+    top: 0;
+    z-index: 28;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 5px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 0 6px !important;
+    padding: 3px 0 5px;
+    background: rgba(255,253,248,.97);
+  }
+
+  .parttabs .stage {
+    flex: 0 0 auto;
+    width: auto !important;
+    min-width: 48px;
+    height: 27px !important;
+    padding: 0 9px !important;
+    border-radius: 999px;
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
+
+  .stageCaption,
+  .toolHint,
+  .metricNote,
+  .confirmMiniText,
+  .outputMiniText,
+  .adjustMiniIntro,
+  .dartMiniText,
+  .measureMiniNote {
+    font-size: 8.8px !important;
+    line-height: 1.3 !important;
+  }
+
+  .measureEntryTitle {
+    font-size: 12px;
+  }
+
+  .measureEntryLead {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 104px;
+    gap: 6px;
+  }
+
+  .measureRequiredColumn,
+  .optionalSleeveGrid,
+  .measureFormGrid {
+    gap: 5px;
+  }
+
+  .optionalSleeveBox {
+    padding: 6px;
+    border-radius: 13px;
+  }
+
+  .optionalSleeveLead {
+    display: none;
+  }
+
+  .measureInputCard {
+    padding: 5px 6px;
+    border-radius: 10px;
+    gap: 2px;
+  }
+
+  .measureInputLabel strong {
+    font-size: 8.8px;
+  }
+
+  .measureInputHint {
+    font-size: 6.8px;
+  }
+
+  .measureInputBox input {
+    height: 22px;
+    font-size: 12.5px;
+  }
+
+  .measureAction {
+    height: 30px;
+    min-height: 30px;
+    font-size: 10px;
+  }
+
+  .earlyLoadBox,
+  .saveHelpBox,
+  .saveMessage,
+  .measureInlineMessage {
+    padding: 6px 7px;
+    border-radius: 11px;
+    font-size: 8.5px;
+    line-height: 1.25;
+  }
+
+  .pointCard {
+    padding: 6px 7px;
+    border-radius: 12px;
+  }
+
+  .pointName {
+    font-size: 10.5px !important;
+  }
+
+  .movePill {
+    padding: 5px 6px;
+  }
+
+  .moveNumber {
+    font-size: 10.5px !important;
+  }
+
+  .zeroState,
+  .deltaNote {
+    font-size: 8.5px !important;
+    line-height: 1.25 !important;
+  }
+}
+
+/* さらに高さが低いスマホ横向きでは、工程ボタンを画面最上部に固定して常に残す */
+@media (orientation: landscape) and (max-height: 430px) and (max-width: 1000px) {
+  .top {
+    padding: 5px 7px;
+  }
+
+  .brandline {
+    display: none;
+  }
+
+  .stagebar {
+    margin-top: 0;
+    padding: 2px 0;
+  }
+
+  .stagebar .stage {
+    min-height: 26px;
+    font-size: 9.5px;
+    padding: 0 8px;
+  }
+
+  .main {
+    padding: 6px;
+    gap: 6px;
+    grid-template-columns: minmax(0, 1fr) minmax(232px, 33vw);
+  }
+
+  .panel {
+    padding: 7px 8px;
+  }
+
+  .panelTitleRow {
+    margin: -7px -8px 5px;
+    padding: 7px 8px 5px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
