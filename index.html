@@ -4836,6 +4836,87 @@ input:focus {
   }
 }
 
+
+/* 0508 smartphone portrait panel width tune:
+   縦向きスマホで下パネルが横長に間延びしないよう、内容幅を整える。 */
+@media (orientation: portrait) and (max-width: 1000px) {
+  .side,
+  .main[data-stage="measure"] .side,
+  .main[data-stage="adjust"] .side,
+  .main[data-stage="dart"] .side,
+  .main[data-stage="confirm"] .side,
+  .main[data-stage="output"] .side {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .side > .panel {
+    width: min(100%, 430px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .measureEntryPanel,
+  .measureStartBox,
+  .measureForm,
+  .measureFormGrid,
+  .pointCardGrid,
+  .dartDualGrid,
+  .confirmStatusGrid,
+  .outputStateGrid,
+  .printActions,
+  .sideActions,
+  .exportActions,
+  .outputBackRow {
+    width: 100%;
+  }
+
+  .measureCompactLayout {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .optionalSleeveBox {
+    width: 100%;
+  }
+
+  .optionalSleeveGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .measureInputCard {
+    max-width: 100%;
+  }
+
+  .measureInputBox {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .confirmStatusRow,
+  .outputStateRow,
+  .pointCard,
+  .measureInputCard {
+    box-shadow: 0 4px 12px rgba(80,58,34,.035);
+  }
+
+  .outputStateGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 幅がかなり狭いスマホでは、袖丈/袖山も1列に戻して詰まりを防ぐ */
+@media (orientation: portrait) and (max-width: 430px) {
+  .side > .panel {
+    width: 100%;
+  }
+
+  .optionalSleeveGrid,
+  .outputStateGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
