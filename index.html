@@ -7174,7 +7174,7 @@ function renderMainHandles() {
  }
 
  if (currentAdjustPart === 'front') {
-  const tPt = state.main.frontT || DATA.front.points.T;
+  const tPt = state.main.frontT || dynamicFrontT();
   g.insertAdjacentHTML('beforeend', `
    <circle class="main-dot" data-main-id="frontT" cx="${r(tPt.x)}" cy="${r(tPt.y)}" r="6.3"/>
    <circle class="sleeve-hit" data-main-id="frontT" cx="${r(tPt.x)}" cy="${r(tPt.y)}" r="11"/>
@@ -7186,7 +7186,9 @@ function renderMainHandles() {
   el.addEventListener('pointerdown', (evt) => {
    evt.preventDefault();
    const id = el.dataset.mainId;
-   dragging = {
+   
+    const currentMainPoint = state.main[id] || (id === 'frontT' ? dynamicFrontT() : (DATA.mainHandles.find(h => h.id === id) || {}).point);
+    if (!currentMainPoint) return;dragging = {
     type: 'main',
     id,
     startMouse: svgPointFromEvent(evt),
@@ -11394,8 +11396,10 @@ function applyDrag(evt) {
  } else if (dragging.type === 'main') {
   if (dragging.id === 'frontT') {
    const base = initialMain('frontT');
+   const startPoint = dragging.startPoint || state.main.frontT || base;
+   if (!state.main.frontT) state.main.frontT = JSON.parse(JSON.stringify(base));
    state.main.frontT.x = base.x;
-   state.main.frontT.y = clamp(dragging.startPoint.y + dy, base.y - 1 * UNIT, base.y + 1 * UNIT);
+   state.main.frontT.y = clamp(startPoint.y + dy, base.y - 1 * UNIT, base.y + 1 * UNIT);
   } else if (dragging.id === 'bp') {
    state.main.bp.x += dx;
    state.main.bp.y += dy;
