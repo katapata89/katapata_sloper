@@ -4517,6 +4517,325 @@ input:focus {
   }
 }
 
+
+
+/* 0508 smartphone portrait stacked layout:
+   スマホ縦向きでは、製図を上・入力/操作パネルを下に並べる。 */
+@media (orientation: portrait) and (max-width: 1000px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .wrap {
+    min-height: 100vh;
+    height: 100vh;
+    padding: 6px;
+    overflow: hidden;
+  }
+
+  .card {
+    height: calc(100vh - 12px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 18px;
+  }
+
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    gap: 6px;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(8px);
+  }
+
+  .brandline {
+    margin-bottom: 5px;
+    gap: 8px;
+  }
+
+  .brandmark {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  h1 {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .note {
+    display: none;
+  }
+
+  .stagebar {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+    margin-top: 4px;
+    padding: 3px 0 2px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .stagebar .stage {
+    flex: 0 0 auto;
+    min-height: 29px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .main,
+  .main[data-stage="measure"],
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"],
+  .main[data-stage="output"] {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: minmax(220px, 42vh) minmax(0, 1fr) !important;
+    gap: 8px;
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  .canvas,
+  .main[data-stage="measure"] .canvas,
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas,
+  .main[data-stage="output"] .canvas {
+    min-height: 0 !important;
+    height: 100% !important;
+    max-height: none !important;
+    border-radius: 15px;
+  }
+
+  .canvas svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .side,
+  .main[data-stage="measure"] .side,
+  .main[data-stage="adjust"] .side,
+  .main[data-stage="dart"] .side,
+  .main[data-stage="confirm"] .side,
+  .main[data-stage="output"] .side {
+    display: block !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    padding-right: 3px;
+    padding-bottom: 72px;
+  }
+
+  .side > .panel {
+    margin-bottom: 8px;
+  }
+
+  .panel {
+    padding: 9px 10px;
+    border-radius: 15px;
+  }
+
+  .panelTitleRow {
+    position: sticky;
+    top: 0;
+    z-index: 35;
+    margin: -9px -10px 6px;
+    padding: 9px 10px 6px;
+    background: rgba(255,253,248,.97);
+    border-bottom: 1px solid #eee6da;
+    backdrop-filter: blur(6px);
+  }
+
+  .panelTitleRow h2 {
+    font-size: 12px;
+  }
+
+  .parttabs {
+    position: sticky;
+    top: 0;
+    z-index: 33;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 5px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 0 6px !important;
+    padding: 3px 0 5px;
+    background: rgba(255,253,248,.97);
+  }
+
+  .parttabs .stage {
+    flex: 0 0 auto;
+    width: auto !important;
+    min-width: 50px;
+    height: 28px !important;
+    padding: 0 10px !important;
+    border-radius: 999px;
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
+
+  .sideActions,
+  .outputBackRow,
+  .confirmActionRow,
+  .exportActions,
+  .printActions {
+    position: sticky;
+    bottom: 0;
+    z-index: 36;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    background: linear-gradient(180deg, rgba(255,253,248,0), rgba(255,253,248,.98) 30%);
+  }
+
+  .sideActions button,
+  .outputBackRow button,
+  .confirmActionRow button,
+  .exportActions button,
+  .printActions button,
+  .panelTopAction,
+  .miniReset,
+  .pointReset {
+    min-height: 30px;
+    height: 30px;
+    border-radius: 12px;
+    padding: 0 9px;
+    font-size: 10px;
+  }
+
+  .stageCaption,
+  .toolHint,
+  .metricNote,
+  .confirmMiniText,
+  .outputMiniText,
+  .adjustMiniIntro,
+  .dartMiniText,
+  .measureMiniNote,
+  .saveHelpBox,
+  .saveMessage,
+  .earlyLoadBox {
+    font-size: 8.8px !important;
+    line-height: 1.3 !important;
+  }
+
+  .measureEntryTitle {
+    font-size: 13px;
+  }
+
+  .measureEntryLead {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 108px;
+    gap: 6px;
+  }
+
+  .measureRequiredColumn,
+  .optionalSleeveGrid,
+  .measureFormGrid,
+  .pointCardGrid,
+  .confirmStatusGrid,
+  .outputStateGrid {
+    gap: 6px;
+  }
+
+  .optionalSleeveBox {
+    padding: 6px;
+    border-radius: 13px;
+  }
+
+  .optionalSleeveLead {
+    display: none;
+  }
+
+  .measureInputCard,
+  .pointCard,
+  .confirmStatusRow,
+  .outputStateRow {
+    padding: 6px 7px;
+    border-radius: 12px;
+  }
+
+  .measureInputLabel strong {
+    font-size: 9px;
+  }
+
+  .measureInputHint {
+    font-size: 6.8px;
+  }
+
+  .measureInputBox input {
+    height: 24px;
+    font-size: 13px;
+  }
+
+  .measureAction {
+    height: 32px;
+    min-height: 32px;
+    font-size: 10px;
+  }
+
+  .pointName {
+    font-size: 10.5px !important;
+  }
+
+  .movePill {
+    padding: 5px 6px;
+  }
+
+  .moveNumber {
+    font-size: 10.5px !important;
+  }
+
+  .zeroState,
+  .deltaNote {
+    font-size: 8.5px !important;
+    line-height: 1.25 !important;
+  }
+}
+
+/* かなり細長い縦画面では、上の製図を少しだけ小さくして下のパネルを確保 */
+@media (orientation: portrait) and (max-width: 520px) and (max-height: 940px) {
+  .main,
+  .main[data-stage="measure"],
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"],
+  .main[data-stage="output"] {
+    grid-template-rows: minmax(190px, 36vh) minmax(0, 1fr) !important;
+  }
+
+  .brandline {
+    margin-bottom: 4px;
+  }
+
+  .top {
+    padding: 7px 9px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
@@ -5344,6 +5663,38 @@ function dist(a, b) {
 }
 function pointAlongLine(a, b, t) {
  return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+}
+
+
+function dynamicFrontOuterPath() {
+ const P0 = DATA.front.points;
+ const T = dynamicFrontT();
+ const S = P0.S;
+ const W2 = state.main.frontShoulder || P0.W2;
+ const fp = frontMainPoints();
+ const neckC1Base = DATA.controls.find(c => c.id === 'frontNeckC1');
+ const neckC2Base = DATA.controls.find(c => c.id === 'frontNeckC2');
+ const upperC1 = controlPoint('frontAHUpperC1');
+ const upperC2 = controlPoint('frontAHUpperC2');
+ const lowerC1 = controlPoint('frontAHLowerC1');
+ const lowerC2 = controlPoint('frontAHLowerC2');
+
+ // 点Tを上下移動した時、襟ぐり第1制御点だけTと同じ縦移動に追従させる。
+ const tDy = T.y - P0.T.y;
+ const neckC1 = neckC1Base ? { x: neckC1Base.point.x, y: neckC1Base.point.y + tDy } : { x: T.x - 16, y: T.y };
+ const neckC2 = neckC2Base ? controlPoint('frontNeckC2') : { x: S.x + 8, y: S.y + 18 };
+
+ return [
+  `M ${p(P0.C)}`,
+  `L ${p(T)}`,
+  `C ${p(neckC1)}, ${p(neckC2)}, ${p(S)}`,
+  `L ${p(W2)}`,
+  `C ${p(upperC1)}, ${p(upperC2)}, ${p(fp.X)}`,
+  `L ${p(fp.R)}`,
+  `C ${p(lowerC1)}, ${p(lowerC2)}, ${p(fp.O2)}`,
+  `L ${p(P0.P)}`,
+  `L ${p(P0.C)}`
+ ].join(' ');
 }
 
 function currentBodiceArmholeMetrics() {
@@ -6611,6 +6962,7 @@ function frontMainPoints(bpPoint = state.main.bp) {
  const frame = frontDynamicFrame(bpPoint);
  return {
   ...DATA.front.points,
+  T: dynamicFrontT(),
   X: frame.X,
   R: frame.R,
  };
@@ -6642,6 +6994,7 @@ function controlPoint(id) {
  return add(controlBaseWithDependencies(id), state.controlOffset[id] || { x: 0, y: 0 });
 }
 function controlAnchor(c) {
+ if (c.id === 'frontNeckC1') return dynamicFrontT();
  if (c.id === 'frontAHUpperC1') return state.main.frontShoulder;
  if (c.id === 'frontAHUpperC2') return frontMainPoints().X;
  if (c.id === 'frontAHLowerC1') return frontMainPoints().R;
@@ -6698,7 +7051,7 @@ function renderStatic() {
     continue;
    }
    const cls = guide.solid ? 'solid-guide' : 'guide';
-   g.insertAdjacentHTML('beforeend', `<path class="${cls}" d="${guide.d}"/>`);
+   g.insertAdjacentHTML('beforeend', `<path class="${cls}" d="${guide.id === "centerFront" ? pathLine(DATA.front.points.C, dynamicFrontT()) : guide.d}"/>`);
   }
   closeBack();
  }
@@ -6708,7 +7061,7 @@ function renderStatic() {
   for (const guide of DATA.front.guides) {
    if (guide.id === 'rToBp' || guide.id === 'xToBp') continue;
    const cls = guide.solid ? 'solid-guide' : 'guide';
-   g.insertAdjacentHTML('beforeend', `<path class="${cls}" d="${guide.d}"/>`);
+   g.insertAdjacentHTML('beforeend', `<path class="${cls}" d="${guide.id === "centerFront" ? pathLine(DATA.front.points.C, dynamicFrontT()) : guide.d}"/>`);
   }
   closeFront();
  }
@@ -7187,7 +7540,7 @@ function renderMainHandles() {
    evt.preventDefault();
    const id = el.dataset.mainId;
    
-    const currentMainPoint = state.main[id] || (id === 'frontT' ? dynamicFrontT() : (DATA.mainHandles.find(h => h.id === id) || {}).point);
+    const currentMainPoint = state.main[id] || (id === 'frontT' ? DATA.front.points.T : (DATA.mainHandles.find(h => h.id === id) || {}).point);
     if (!currentMainPoint) return;dragging = {
     type: 'main',
     id,
