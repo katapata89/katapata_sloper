@@ -8174,7 +8174,7 @@ function startQuarterPrint() {
   }
   svg .outer {
     stroke: #111;
-    stroke-width: 2.4;
+    stroke-width: 2.1;
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
@@ -8182,31 +8182,31 @@ function startQuarterPrint() {
   svg .dart,
   svg .solid-guide {
     stroke: #111;
-    stroke-width: 1.15;
+    stroke-width: 1.0;
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
   }
   svg .center {
     stroke: #aaa;
-    stroke-width: .9;
+    stroke-width: .8;
     fill: none;
     stroke-dasharray: 3 3;
   }
   svg .waist-dart {
     stroke: #c7c7c7;
-    stroke-width: 1.0;
+    stroke-width: 0.9;
     fill: none;
   }
   svg .waist-center {
     stroke: #d7d7d7;
-    stroke-width: .6;
+    stroke-width: .55;
     fill: none;
     stroke-dasharray: 2 3.4;
   }
   svg .rotation-line {
     stroke: #111;
-    stroke-width: 1.15;
+    stroke-width: 1.0;
     fill: none;
     stroke-linecap: round;
   }
@@ -9061,12 +9061,12 @@ function startFullSizePdf() {
   .printPage { width: ${fullWidthMm}mm; height: ${fullHeightMm}mm; box-sizing: border-box; padding: 0; display: block; overflow: hidden; page-break-after: avoid; break-after: avoid; }
   .scaleWrap { width: ${fullWidthMm}mm; height: ${fullHeightMm}mm; display: block; overflow: hidden; }
   svg { width: ${fullWidthMm}mm; height: ${fullHeightMm}mm; display: block; overflow: visible; }
-  svg .outer { stroke: #111; stroke-width: 2.0; fill: none; stroke-linejoin: round; stroke-linecap: round; }
-  svg .dart, svg .solid-guide { stroke: #111; stroke-width: 0.95; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+  svg .outer { stroke: #111; stroke-width: 1.8; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+  svg .dart, svg .solid-guide { stroke: #111; stroke-width: 0.85; fill: none; stroke-linejoin: round; stroke-linecap: round; }
   svg .center { stroke: #aaa; stroke-width: .75; fill: none; stroke-dasharray: 3 3; }
-  svg .waist-dart { stroke: #c7c7c7; stroke-width: 0.85; fill: none; }
-  svg .waist-center { stroke: #d7d7d7; stroke-width: .5; fill: none; stroke-dasharray: 2 3.4; }
-  svg .rotation-line { stroke: #111; stroke-width: 1.15; fill: none; stroke-linecap: round; }
+  svg .waist-dart { stroke: #c7c7c7; stroke-width: 0.78; fill: none; }
+  svg .waist-center { stroke: #d7d7d7; stroke-width: .45; fill: none; stroke-dasharray: 2 3.4; }
+  svg .rotation-line { stroke: #111; stroke-width: 1.0; fill: none; stroke-linecap: round; }
   svg .guide, svg .dim-line, svg .source-dart { stroke: #cfcfcf; stroke-width: .72; fill: none; }
   svg .split-line, svg .split-dot, svg .split-text, svg .dart-preview, svg .dart-label, svg .dim-text, svg .handle, svg .main-handle, svg .control-line, svg .delta-text { display: none !important; }
   svg text.label { fill: #555; font-size: 11px; font-weight: 800; }
@@ -10150,8 +10150,9 @@ function startA4TiledPrint() {
   .tilePage {
     position: relative;
     width: 210mm;
-    min-height: 288mm;
-    padding: 4mm 10mm 7mm 10mm;
+    height: 286mm;
+    min-height: 0;
+    padding: 3mm 10mm 5mm 10mm;
     page-break-after: always;
     break-after: page;
     page-break-inside: avoid;
@@ -10162,6 +10163,62 @@ function startA4TiledPrint() {
     page-break-after: auto;
     break-after: auto;
   }
+
+  /* iOS Safari print/PDF: A4ぴったり扱いで白紙が挟まる対策 */
+  .iosPrint .tilePage {
+    height: 286mm !important;
+    min-height: 0 !important;
+    padding-top: 3mm !important;
+    padding-bottom: 5mm !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-before: avoid;
+    break-before: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .iosPrint .tilePage:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+  .iosPrint .tileMeta,
+  .iosPrint .tileFooter {
+    height: 5mm !important;
+    line-height: 1.1 !important;
+  }
+  .iosPrint .tileViewportWrap,
+  .iosPrint .tileViewport {
+    height: 264mm !important;
+  }
+  .iosPrint .tileMaskRight {
+    height: 264mm !important;
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .tilePage {
+      height: 286mm;
+      min-height: 0;
+      padding-top: 3mm;
+      padding-bottom: 5mm;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .tilePage:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+    .tileMeta,
+    .tileFooter {
+      height: 5mm;
+      line-height: 1.1;
+    }
+    .tileViewportWrap,
+    .tileViewport,
+    .tileMaskRight {
+      height: 264mm;
+    }
+  }
+
   .tileMeta,
   .tileFooter {
     display: flex;
@@ -10171,12 +10228,12 @@ function startA4TiledPrint() {
     font-size: 7.5px;
     color: #555;
     font-weight: 700;
-    height: 6mm;
+    height: 5mm;
     white-space: nowrap;
   }
   .tileViewportWrap {
     width: 190mm;
-    height: 265mm;
+    height: 264mm;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10184,7 +10241,7 @@ function startA4TiledPrint() {
   .tileViewport {
     position: relative;
     width: 190mm;
-    height: 265mm;
+    height: 264mm;
     overflow: hidden;
     border: 0.25mm solid #d5d5d5;
     background: #fff;
@@ -10210,7 +10267,7 @@ function startA4TiledPrint() {
   .tileMaskRight {
     top: 0;
     right: 0;
-    height: 265mm;
+    height: 264mm;
   }
   .tileMaskBottom {
     left: 0;
@@ -10231,7 +10288,7 @@ function startA4TiledPrint() {
     position: absolute;
     background: #8e8e8e;
   }
-  .cropTL { left: 0; top: 0; width: 6mm; height: 6mm; }
+  .cropTL { left: 0; top: 0; width: 6mm; height: 5mm; }
   .cropTR { right: 0; top: 0; width: 6mm; height: 6mm; }
   .cropBL { left: 0; bottom: 0; width: 6mm; height: 6mm; }
   .cropBR { right: 0; bottom: 0; width: 6mm; height: 6mm; }
@@ -10276,7 +10333,7 @@ function startA4TiledPrint() {
 
   svg .outer {
     stroke: #111;
-    stroke-width: 2.0;
+    stroke-width: 1.8;
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
@@ -10284,31 +10341,31 @@ function startA4TiledPrint() {
   svg .dart,
   svg .solid-guide {
     stroke: #111;
-    stroke-width: 0.95;
+    stroke-width: 0.85;
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
   }
   svg .center {
     stroke: #aaa;
-    stroke-width: .75;
+    stroke-width: .68;
     fill: none;
     stroke-dasharray: 3 3;
   }
   svg .waist-dart {
     stroke: #c7c7c7;
-    stroke-width: 0.85;
+    stroke-width: 0.78;
     fill: none;
   }
   svg .waist-center {
     stroke: #d7d7d7;
-    stroke-width: .5;
+    stroke-width: .45;
     fill: none;
     stroke-dasharray: 2 3.4;
   }
   svg .rotation-line {
     stroke: #111;
-    stroke-width: 0.95;
+    stroke-width: 0.85;
     fill: none;
     stroke-linecap: round;
   }
