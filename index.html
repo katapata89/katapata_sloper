@@ -5240,6 +5240,178 @@ input:focus {
   }
 }
 
+
+
+/* 0508 iPhone12mini landscape tune:
+   製図を少し細め、右パネルをやや広く。必須3項目をコンパクト化して
+   袖丈・袖山ブロックが見えやすいようにする。 */
+@media (orientation: landscape) and (max-width: 860px) and (max-height: 430px) {
+  .main,
+  .main[data-stage="measure"],
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"],
+  .main[data-stage="output"] {
+    grid-template-columns: minmax(0, 0.88fr) minmax(312px, 41vw) !important;
+    gap: 6px !important;
+  }
+
+  .main[data-stage="measure"] .panel {
+    padding: 7px 8px;
+  }
+
+  .main[data-stage="measure"] .panelTitleRow {
+    margin: -7px -8px 5px;
+    padding: 7px 8px 5px;
+  }
+
+  .main[data-stage="measure"] .measureEntryTitle {
+    font-size: 13px !important;
+    line-height: 1.15;
+  }
+
+  .main[data-stage="measure"] .measureEntryLead,
+  .main[data-stage="measure"] .measureMiniNote {
+    display: none;
+  }
+
+  .main[data-stage="measure"] .measureFormGrid {
+    gap: 5px;
+  }
+
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 92px !important;
+    gap: 5px !important;
+    align-items: start;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    gap: 4px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 128px;
+    align-items: center;
+    gap: 4px 7px;
+    padding: 4px 6px;
+    border-radius: 10px;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputLabel {
+    display: grid;
+    gap: 1px;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputLabel strong {
+    font-size: 11.5px !important;
+    line-height: 1.1;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputHint {
+    font-size: 7.2px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 128px !important;
+    justify-self: end;
+    padding: 0 7px;
+    border-radius: 9px;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox input {
+    height: 22px;
+    font-size: 14px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox .unit {
+    font-size: 8px;
+  }
+
+  .main[data-stage="measure"] .measureOptionalColumn {
+    align-self: start;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    padding: 5px;
+    border-radius: 12px;
+    gap: 4px;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveHead {
+    padding: 0;
+    gap: 0;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveTitle {
+    font-size: 8.8px;
+    line-height: 1.15;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveLead {
+    display: none;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid {
+    grid-template-columns: 1fr !important;
+    gap: 4px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
+    padding: 4px 5px;
+    gap: 2px;
+    border-radius: 10px;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel {
+    display: grid;
+    gap: 1px;
+    justify-content: start;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel strong {
+    font-size: 10.5px !important;
+    line-height: 1.05;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputHint {
+    display: none;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 100%;
+    padding: 0 6px;
+    border-radius: 9px;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox input {
+    height: 21px;
+    font-size: 13px !important;
+  }
+
+  .main[data-stage="measure"] .measureAction {
+    height: 29px;
+    min-height: 29px;
+    font-size: 11.5px !important;
+    margin-top: 1px;
+  }
+
+  .main[data-stage="measure"] .measureInlineMessage,
+  .main[data-stage="measure"] .saveHelpBox,
+  .main[data-stage="measure"] .saveMessage,
+  .main[data-stage="measure"] .earlyLoadBox {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    padding: 5px 6px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
