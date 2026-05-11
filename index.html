@@ -8484,14 +8484,14 @@ function renderMainHandles() {
     g.insertAdjacentHTML('beforeend', `
      <circle class="main-dot" data-sleeve-key="${key}" cx="${r(pt.x)}" cy="${r(pt.y)}" r="6.8"/>
      <circle class="sleeve-hit" data-sleeve-key="${key}" cx="${r(pt.x)}" cy="${r(pt.y)}" r="11"/>
-     ${sleeveDeltaInfo(key).moved ? `<text class="delta-text" text-anchor="middle" x="${r(pt.x)}" y="${r(pt.y - 14)}"><tspan x="${r(pt.x)}">${directionLabelX(sleeveDeltaInfo(key).dx)}</tspan><tspan x="${r(pt.x)}" dy="1.12em">${directionLabelY(sleeveDeltaInfo(key).dy)}</tspan></text>` : ''}
+     ${sleeveDeltaInfo(key).moved ? `<text class="delta-text" text-anchor="middle" x="${r(pt.x)}" y="${r(pt.y - 26)}"><tspan x="${r(pt.x)}">${directionLabelX(sleeveDeltaInfo(key).dx)}</tspan><tspan x="${r(pt.x)}" dy="1.12em">${directionLabelY(sleeveDeltaInfo(key).dy)}</tspan></text>` : ''}
     `);
    } else {
     const isUpperKey = key === 'backUpper' || key === 'frontUpper';
     const isLowerKey = key === 'backLower' || key === 'frontLower';
     const deltaText = sleeveDeltaInfo(key).moved
       ? (isUpperKey
-          ? `<text class="delta-text" text-anchor="middle" x="${r(pt.x)}" y="${r(pt.y - 14)}"><tspan x="${r(pt.x)}">${directionLabelX(sleeveDeltaInfo(key).dx)}</tspan><tspan x="${r(pt.x)}" dy="1.12em">${directionLabelY(sleeveDeltaInfo(key).dy)}</tspan></text>`
+          ? `<text class="delta-text" text-anchor="middle" x="${r(pt.x)}" y="${r(pt.y - 26)}"><tspan x="${r(pt.x)}">${directionLabelX(sleeveDeltaInfo(key).dx)}</tspan><tspan x="${r(pt.x)}" dy="1.12em">${directionLabelY(sleeveDeltaInfo(key).dy)}</tspan></text>`
           : `<text class="delta-text" text-anchor="middle" x="${r(pt.x)}" y="${r(pt.y + 20)}"><tspan x="${r(pt.x)}">${directionLabelX(sleeveDeltaInfo(key).dx)}</tspan><tspan x="${r(pt.x)}" dy="1.12em">${directionLabelY(sleeveDeltaInfo(key).dy)}</tspan></text>`)
       : '';
     g.insertAdjacentHTML('beforeend', `
