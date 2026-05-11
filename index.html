@@ -4917,6 +4917,159 @@ input:focus {
   }
 }
 
+
+/* 0508 mobile readable text tune:
+   スマホ表示時の文字を全体的に少し大きくして読みやすくする。 */
+@media (max-width: 1000px) {
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  h1 {
+    font-size: 16px !important;
+  }
+
+  .stagebar .stage,
+  .parttabs .stage {
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+  }
+
+  .panelTitleRow h2,
+  .panel h2 {
+    font-size: 14px !important;
+  }
+
+  .note,
+  .stageCaption,
+  .toolHint,
+  .metricNote,
+  .confirmMiniText,
+  .outputMiniText,
+  .adjustMiniIntro,
+  .dartMiniText,
+  .measureMiniNote,
+  .saveHelpBox,
+  .saveMessage,
+  .earlyLoadBox,
+  .measureInlineMessage,
+  .zeroState,
+  .deltaNote {
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+  }
+
+  .measureEntryTitle {
+    font-size: 14px !important;
+  }
+
+  .measureEntryLead {
+    font-size: 9.5px !important;
+    line-height: 1.35 !important;
+  }
+
+  .measureInputLabel strong,
+  .pointName,
+  .confirmStatusName,
+  .outputStateName,
+  .deltaName {
+    font-size: 11px !important;
+  }
+
+  .measureInputHint {
+    font-size: 8px !important;
+    line-height: 1.3 !important;
+  }
+
+  .measureInputBox input,
+  .measureInputBox select,
+  .measureInputBox button {
+    font-size: 14px !important;
+  }
+
+  .measureAction,
+  .sideActions button,
+  .outputBackRow button,
+  .confirmActionRow button,
+  .exportActions button,
+  .printActions button,
+  .panelTopAction,
+  .miniReset,
+  .pointReset {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+  }
+
+  .moveAxis,
+  .miniChip,
+  .confirmStatusValue,
+  .outputStateValue,
+  .deltaValue {
+    font-size: 10px !important;
+  }
+
+  .moveNumber {
+    font-size: 11px !important;
+  }
+
+  .label,
+  .dim-text,
+  .split-text,
+  .delta-text,
+  .logText {
+    font-size: 11px !important;
+  }
+}
+
+/* 特に細いスマホでは、説明文をさらに少しだけ見やすく。 */
+@media (max-width: 520px) {
+  .note,
+  .stageCaption,
+  .toolHint,
+  .metricNote,
+  .confirmMiniText,
+  .outputMiniText,
+  .adjustMiniIntro,
+  .dartMiniText,
+  .measureMiniNote,
+  .saveHelpBox,
+  .saveMessage,
+  .earlyLoadBox,
+  .measureInlineMessage,
+  .zeroState,
+  .deltaNote {
+    font-size: 10.5px !important;
+  }
+
+  .measureInputLabel strong,
+  .pointName,
+  .confirmStatusName,
+  .outputStateName,
+  .deltaName {
+    font-size: 11.5px !important;
+  }
+
+  .measureInputBox input,
+  .measureInputBox select {
+    font-size: 15px !important;
+  }
+
+  .stagebar .stage,
+  .parttabs .stage,
+  .measureAction,
+  .sideActions button,
+  .outputBackRow button,
+  .confirmActionRow button,
+  .exportActions button,
+  .printActions button,
+  .panelTopAction,
+  .miniReset,
+  .pointReset {
+    font-size: 11.5px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
