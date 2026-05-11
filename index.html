@@ -4,7 +4,6 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KATAPATA beta v1</title>
 <style>
  body {
@@ -5606,209 +5605,59 @@ input:focus {
 
 
 
-/* 0508 iPhone landscape force compact:
-   iPhone Safariでは横向き時もCSS幅が860px以下にならない場合があるため、
-   高さ基準＋広めの幅条件で確実に寸法入力画面を詰める。 */
-@media (orientation: landscape) and (max-height: 520px) and (max-width: 1200px) {
-  .main[data-stage="measure"] {
-    grid-template-columns: minmax(0, 0.72fr) minmax(344px, 1fr) !important;
-    gap: 4px !important;
-    padding: 5px !important;
-  }
-
-  .main[data-stage="measure"] .canvas {
-    min-width: 0 !important;
-    border-radius: 12px !important;
-  }
-
-  .main[data-stage="measure"] .side {
-    min-width: 344px !important;
-    padding-right: 0 !important;
-    padding-bottom: 44px !important;
-  }
-
-  .main[data-stage="measure"] .panel {
-    padding: 5px 6px !important;
-    border-radius: 12px !important;
-  }
-
-  .main[data-stage="measure"] .panelTitleRow {
-    margin: -5px -6px 4px !important;
-    padding: 5px 6px 4px !important;
-  }
-
-  .main[data-stage="measure"] .panelTitleRow h2 {
-    font-size: 13px !important;
-    line-height: 1.1 !important;
-  }
-
-  .main[data-stage="measure"] .measureEntryTop {
-    gap: 1px !important;
-  }
-
-  .main[data-stage="measure"] .measureEntryTitle {
-    font-size: 12px !important;
-    line-height: 1.1 !important;
-  }
-
-  .main[data-stage="measure"] .measureEntryLead,
-  .main[data-stage="measure"] .measureMiniNote,
-  .main[data-stage="measure"] .optionalSleeveLead {
-    display: none !important;
-  }
-
-  .main[data-stage="measure"] .measureFormGrid {
-    gap: 4px !important;
-  }
-
-  .main[data-stage="measure"] .measureCompactLayout {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 82px !important;
-    gap: 4px !important;
-    align-items: start !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn {
-    width: auto !important;
-    max-width: none !important;
-    margin: 0 !important;
-    gap: 3px !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 110px !important;
-    align-items: center !important;
-    gap: 3px 5px !important;
-    padding: 3px 5px !important;
-    border-radius: 9px !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn .measureInputLabel {
-    display: grid !important;
-    gap: 0 !important;
-    justify-content: start !important;
-    align-items: start !important;
-    min-width: 0 !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn .measureInputLabel strong {
-    font-size: 10.5px !important;
-    line-height: 1.05 !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn .measureInputHint {
-    font-size: 6.4px !important;
-    line-height: 1.05 !important;
-    white-space: nowrap !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
-    width: 110px !important;
-    justify-self: end !important;
-    padding: 0 5px !important;
-    border-radius: 8px !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox input {
-    height: 20px !important;
-    font-size: 13px !important;
-  }
-
-  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox .unit {
-    font-size: 7px !important;
-  }
-
-  .main[data-stage="measure"] .measureOptionalColumn {
-    min-width: 0 !important;
-    align-self: start !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveBox {
-    width: 82px !important;
-    padding: 3px !important;
-    border-radius: 10px !important;
-    gap: 2px !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveHead {
-    padding: 0 !important;
-    gap: 0 !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveTitle {
-    font-size: 7.5px !important;
-    line-height: 1.05 !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid {
-    grid-template-columns: 1fr !important;
-    gap: 3px !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
-    padding: 3px !important;
-    gap: 1px !important;
-    border-radius: 8px !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel {
-    display: grid !important;
-    gap: 0 !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel strong {
-    font-size: 9px !important;
-    line-height: 1 !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid .measureInputHint {
-    display: none !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
-    width: 100% !important;
-    padding: 0 4px !important;
-    border-radius: 8px !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox input {
-    height: 18px !important;
-    font-size: 11.5px !important;
-  }
-
-  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox .unit {
-    font-size: 6.5px !important;
-  }
-
-  .main[data-stage="measure"] .measureAction {
-    height: 27px !important;
-    min-height: 27px !important;
-    font-size: 10.5px !important;
-    margin-top: 0 !important;
-  }
-
-  .main[data-stage="measure"] .measureInlineMessage,
-  .main[data-stage="measure"] .saveHelpBox,
-  .main[data-stage="measure"] .saveMessage,
-  .main[data-stage="measure"] .earlyLoadBox {
-    font-size: 8px !important;
-    line-height: 1.15 !important;
-    padding: 4px 5px !important;
-  }
+/* 0508 foldable optional sleeve inputs + sleeve metrics summary */
+.optionalSleeveBoxFold {
+  padding: 0;
+  overflow: hidden;
 }
-
-/* iOS Safari用の追加保険 */
-@supports (-webkit-touch-callout: none) {
-  @media (orientation: landscape) and (max-height: 520px) {
-    .main[data-stage="measure"] {
-      grid-template-columns: minmax(0, 0.70fr) minmax(350px, 1fr) !important;
-    }
-
-    .main[data-stage="measure"] .side {
-      min-width: 350px !important;
-    }
-  }
+.optionalSleeveBoxFold summary {
+  list-style: none;
+  cursor: pointer;
+}
+.optionalSleeveBoxFold summary::-webkit-details-marker {
+  display: none;
+}
+.optionalSleeveToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+}
+.optionalSleeveToggleText {
+  min-width: 0;
+}
+.optionalSleeveToggleText .optionalSleeveTitle,
+.optionalSleeveToggleText .optionalSleeveLead {
+  margin: 0;
+}
+.optionalSleeveCaret {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #f2ece2;
+  color: #8e7e68;
+  font-size: 15px;
+  font-weight: 900;
+  transform: rotate(0deg);
+  transition: transform .16s ease, background .16s ease;
+}
+.optionalSleeveBoxFold[open] .optionalSleeveCaret {
+  transform: rotate(90deg);
+  background: #e9e0d2;
+}
+.optionalSleeveFoldBody {
+  padding: 0 8px 8px;
+}
+.compactSleeveSummary.metrics4 {
+  grid-template-columns: 1fr 1fr;
+}
+.compactSleeveSummary.metrics4 .compactSleeveStatValue.subtle {
+  color: #5f5a52;
 }
 
 </style>
@@ -12247,16 +12096,21 @@ function measureStartPanelHtml() {
       ${measureInputHtml('backLength', '背丈', 0.5, '横向きガイド')}
      </div>
      <div class="measureOptionalColumn">
-      <div class="optionalSleeveBox">
-       <div class="optionalSleeveHead">
-        <p class="optionalSleeveTitle">必要な場合のみ入力</p>
-        <p class="optionalSleeveLead">袖を作る時だけ入力</p>
+      <details class="optionalSleeveBox optionalSleeveBoxFold" ${(String(measurementState.sleeveLength ?? '').trim() || String(measurementState.sleeveCap ?? '').trim()) ? 'open' : ''}>
+       <summary class="optionalSleeveHead optionalSleeveToggle">
+        <div class="optionalSleeveToggleText">
+         <p class="optionalSleeveTitle">必要な場合のみ入力</p>
+         <p class="optionalSleeveLead">袖を作る時だけ入力</p>
+        </div>
+        <span class="optionalSleeveCaret" aria-hidden="true">›</span>
+       </summary>
+       <div class="optionalSleeveFoldBody">
+        <div class="optionalSleeveGrid">
+         ${measureInputHtml('sleeveLength', '袖丈', 0.5, '')}
+         ${measureInputHtml('sleeveCap', '袖山', 0.5, '')}
+        </div>
        </div>
-       <div class="optionalSleeveGrid">
-        ${measureInputHtml('sleeveLength', '袖丈', 0.5, '')}
-        ${measureInputHtml('sleeveCap', '袖山', 0.5, '')}
-       </div>
-      </div>
+      </details>
      </div>
     </div>
     <button type="button" class="measureAction" onclick="createPatternFromMeasurements()">${measureActionLabel()}</button>
@@ -12429,6 +12283,7 @@ function renderSideContent() {
   currentAdjustPart = normalizePartForSleeve(currentAdjustPart);
   const part = currentAdjustPart;
   const sleeve = hasSleeve() ? sleeveMetrics() : null;
+  const armhole = currentBodiceArmholeMetrics();
   const activeTitle = activePartTitle();
   const activeHint = part === 'all'
    ? (hasSleeve() ? '前・後・袖の収まりを確認。' : '袖なし。前・後のみ中央表示。')
@@ -12443,11 +12298,13 @@ function renderSideContent() {
    ? `${adjustBodyMetricsHtml()}${pointAdjustmentCardsHtml('front')}`
    : part === 'back'
    ? `${adjustBodyMetricsHtml()}${pointAdjustmentCardsHtml('back')}`
-   : `<div class="compactSleeveSummary">
+   : `<div class="compactSleeveSummary metrics4">
+      <div class="compactSleeveStat"><span class="compactSleeveStatLabel">後AHカーブ</span><span class="compactSleeveStatValue subtle">${armhole.backAH.toFixed(2)} cm</span></div>
+      <div class="compactSleeveStat"><span class="compactSleeveStatLabel">前AHカーブ</span><span class="compactSleeveStatValue subtle">${armhole.frontAH.toFixed(2)} cm</span></div>
       <div class="compactSleeveStat"><span class="compactSleeveStatLabel">後袖山カーブ</span><span class="compactSleeveStatValue">${sleeve.backLen.toFixed(2)} cm</span></div>
       <div class="compactSleeveStat"><span class="compactSleeveStatLabel">前袖山カーブ</span><span class="compactSleeveStatValue">${sleeve.frontLen.toFixed(2)} cm</span></div>
      </div>
-     <div class="metricNote">袖山トップの移動量は画面上に表示します。袖山・袖丈の寸法線は「寸法表示：ON」で表示します。</div>
+     <div class="metricNote">前後のアームホール長と、前後の袖山長を並べて確認できます。袖山トップの移動量は画面上に表示します。袖山・袖丈の寸法線は「寸法表示：ON」で表示します。</div>
      ${compactSleeveCardsHtml()}`;
   const sleeveTabHtml = hasSleeve()
    ? `<button type="button" class="stage ${part === 'sleeve' ? 'active' : ''}" onclick="setAdjustPart('sleeve')">袖</button>`
