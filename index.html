@@ -6504,6 +6504,276 @@ input:focus {
   }
 }
 
+
+/* 0508 mobile pc-narrow layout:
+   スマホでは、PCを縦に細くした時のような縦積みレイアウトに統一する。
+   iPhone/Android横向きの無理な横並びを避け、崩れにくさ優先。 */
+@media (max-width: 1000px) and (pointer: coarse) {
+  html,
+  body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  .wrap {
+    width: 100% !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    padding: 6px !important;
+    overflow: visible !important;
+  }
+
+  .card {
+    width: min(100%, 460px) !important;
+    max-width: calc(100vw - 12px) !important;
+    min-height: calc(100svh - 12px) !important;
+    height: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    overflow: visible !important;
+    border-radius: 18px !important;
+  }
+
+  .top,
+  .appTop {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 80 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    padding: 7px 9px !important;
+    background: rgba(255,255,255,.96) !important;
+    backdrop-filter: blur(8px);
+  }
+
+  .appTopMain {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+
+  .appBrand {
+    margin: 0 !important;
+  }
+
+  .appBrand h1 {
+    font-size: 15px !important;
+  }
+
+  .appBrand .note {
+    display: none !important;
+  }
+
+  .stagebar,
+  .appStagebar {
+    display: flex !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 3px 0 2px !important;
+  }
+
+  .stagebar .stage,
+  .appStagebar .stage {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 74px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 11px !important;
+    border-radius: 999px !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+  }
+
+  .stagebar .stage span,
+  .appStagebar .stage span {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 10px !important;
+  }
+
+  #resetBtn {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 66px !important;
+    max-width: 90px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 11px !important;
+    border-radius: 999px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+
+  .main,
+  .main[data-stage="measure"],
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"],
+  .main[data-stage="output"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 8px !important;
+    padding: 8px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .canvas,
+  .main[data-stage="measure"] .canvas,
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas,
+  .main[data-stage="output"] .canvas {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 260px !important;
+    min-height: 220px !important;
+    max-height: 42svh !important;
+    justify-self: stretch !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+  }
+
+  .main[data-stage="measure"] .canvas {
+    height: 292px !important;
+    min-height: 260px !important;
+    max-height: 46svh !important;
+  }
+
+  .canvas svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .side,
+  .main[data-stage="measure"] .side,
+  .main[data-stage="adjust"] .side,
+  .main[data-stage="dart"] .side,
+  .main[data-stage="confirm"] .side,
+  .main[data-stage="output"] .side {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  .side > .panel,
+  .panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 10px 11px !important;
+    border-radius: 15px !important;
+  }
+
+  .panelTitleRow {
+    position: sticky !important;
+    top: 48px !important;
+    z-index: 45 !important;
+    margin: -10px -11px 8px !important;
+    padding: 10px 11px 7px !important;
+    background: rgba(255,253,248,.97) !important;
+  }
+
+  .measureCompactLayout {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+  }
+
+  .measureRequiredColumn,
+  .measureOptionalColumn {
+    width: min(100%, 330px) !important;
+    max-width: 330px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .measureRequiredColumn .measureInputCard,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 132px !important;
+    gap: 5px 8px !important;
+    align-items: center !important;
+    padding: 6px 7px !important;
+  }
+
+  .measureRequiredColumn .measureInputBox,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 132px !important;
+    justify-self: end !important;
+  }
+
+  .optionalSleeveBox {
+    width: 100% !important;
+  }
+
+  .optionalSleeveGrid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+
+  .measureAction {
+    width: min(100%, 330px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (max-width: 430px) and (pointer: coarse) {
+  .card {
+    width: min(100%, 410px) !important;
+  }
+
+  .canvas,
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas,
+  .main[data-stage="output"] .canvas {
+    height: 240px !important;
+    min-height: 205px !important;
+  }
+
+  .main[data-stage="measure"] .canvas {
+    height: 278px !important;
+    min-height: 248px !important;
+  }
+
+  .measureRequiredColumn,
+  .measureOptionalColumn,
+  .measureAction {
+    width: min(100%, 315px) !important;
+    max-width: 315px !important;
+  }
+
+  .measureRequiredColumn .measureInputCard,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 124px !important;
+  }
+
+  .measureRequiredColumn .measureInputBox,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 124px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
