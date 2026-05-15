@@ -7086,6 +7086,52 @@ input:focus {
   }
 }
 
+
+
+/* 0508 portrait torso balance tweak:
+   スマホ縦向きで左の前向きトルソーだけ大きく見えすぎるため、
+   前・横トルソーのサイズバランスをもう少し控えめに整える。 */
+@media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
+  .main[data-stage="measure"] .canvas {
+    height: 264px !important;
+    min-height: 236px !important;
+    max-height: 39svh !important;
+  }
+
+  .measureFigureGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .70fr) !important;
+    gap: 4px !important;
+    align-items: end !important;
+  }
+
+  .torsoWrap {
+    width: 156px !important;
+    height: 294px !important;
+  }
+
+  .torsoWrap.side {
+    width: 88px !important;
+    height: 294px !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
+  .main[data-stage="measure"] .canvas {
+    height: 252px !important;
+    min-height: 228px !important;
+  }
+
+  .torsoWrap {
+    width: 148px !important;
+    height: 280px !important;
+  }
+
+  .torsoWrap.side {
+    width: 84px !important;
+    height: 280px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
