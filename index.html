@@ -6251,6 +6251,112 @@ input:focus {
   }
 }
 
+
+
+/* 0508 portrait reset+torso fix:
+   縦向きスマホで初期化ボタンを工程列の端に入れ、
+   トルソーが見切れないように前/横イラストの幅配分を整える。 */
+@media (orientation: portrait) and (max-width: 1000px) {
+  .appTop {
+    align-items: stretch !important;
+    gap: 6px !important;
+  }
+  .appTopMain {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+  .appBrand {
+    margin-bottom: 0 !important;
+  }
+  .appStagebar.hasInlineReset {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 5px !important;
+    align-items: stretch !important;
+  }
+  #resetBtn.inStagebar {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 32px !important;
+    margin: 0 !important;
+    padding: 0 6px !important;
+    border-radius: 11px !important;
+    font-size: 10px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+    justify-self: stretch !important;
+    align-self: stretch !important;
+  }
+
+  .main[data-stage="measure"] {
+    grid-template-rows: minmax(175px, 33vh) minmax(0, 1fr) !important;
+  }
+  .main[data-stage="measure"] .canvas {
+    width: min(100%, 372px) !important;
+    max-width: calc(100vw - 16px) !important;
+    min-height: 175px !important;
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .main[data-stage="measure"] .measureCanvas {
+    padding: 8px 8px 6px !important;
+  }
+  .measureHero {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 5px !important;
+  }
+  .measureHeroTitle {
+    padding: 5px 9px !important;
+  }
+  .measureHeroTitle strong {
+    font-size: 13px !important;
+  }
+  .measureFigureGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .58fr) !important;
+    gap: 6px !important;
+    align-items: end !important;
+  }
+  .torsoWrap {
+    width: min(46vw, 180px) !important;
+    height: auto !important;
+    aspect-ratio: 594 / 1122 !important;
+  }
+  .torsoWrap.side {
+    width: min(26vw, 102px) !important;
+    height: auto !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 520px) {
+  .appStagebar.hasInlineReset {
+    gap: 4px !important;
+  }
+  #resetBtn.inStagebar {
+    height: 30px !important;
+    font-size: 9.5px !important;
+    padding: 0 5px !important;
+  }
+  .main[data-stage="measure"] {
+    grid-template-rows: minmax(170px, 31vh) minmax(0, 1fr) !important;
+  }
+  .main[data-stage="measure"] .canvas {
+    width: min(100%, 350px) !important;
+    max-width: calc(100vw - 12px) !important;
+    min-height: 170px !important;
+  }
+  .measureFigureGrid {
+    gap: 4px !important;
+  }
+  .torsoWrap {
+    width: min(47vw, 172px) !important;
+  }
+  .torsoWrap.side {
+    width: min(25vw, 94px) !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
@@ -8967,6 +9073,23 @@ function renderMainHandles() {
   });
  });
 }
+function relocateResetButtonForPortrait() {
+ const resetBtn = document.getElementById('resetBtn');
+ const home = document.getElementById('resetBtnHome');
+ const stagebar = document.querySelector('.appStagebar');
+ if (!resetBtn || !home || !home.parentElement || !stagebar) return;
+ const shouldInline = window.matchMedia('(orientation: portrait) and (max-width: 1000px)').matches;
+ if (shouldInline) {
+  if (resetBtn.parentElement !== stagebar) stagebar.appendChild(resetBtn);
+  resetBtn.classList.add('inStagebar');
+  stagebar.classList.add('hasInlineReset');
+ } else {
+  if (resetBtn.parentElement !== home.parentElement) home.parentElement.insertBefore(resetBtn, home);
+  resetBtn.classList.remove('inStagebar');
+  stagebar.classList.remove('hasInlineReset');
+ }
+}
+
 function updateStageButtons() {
  document.querySelectorAll('[data-stage]').forEach(btn => {
   const stage = btn.dataset.stage;
