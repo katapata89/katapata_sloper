@@ -6831,6 +6831,38 @@ input:focus {
   }
 }
 
+
+/* 0508 mobile portrait zoom scroll fix:
+   transform拡大で見た目だけ大きくなり、下部がスクロール範囲外になる問題を補正。 */
+@media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
+  html,
+  body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  .wrap {
+    padding-bottom: 360px !important;
+  }
+
+  .wrap::after {
+    content: "";
+    display: block;
+    height: 220px;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
+  .wrap {
+    padding-bottom: 330px !important;
+  }
+
+  .wrap::after {
+    height: 200px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
