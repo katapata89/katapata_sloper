@@ -5949,6 +5949,76 @@ input:focus {
   }
 }
 
+
+
+/* 0508 adjust panel text larger:
+   調整項目の文字をPCでも見やすいように一段大きくする。 */
+.main[data-stage="adjust"] .adjustMiniIntro {
+  font-size: 13.5px !important;
+  line-height: 1.4 !important;
+}
+.main[data-stage="adjust"] .adjustMiniIntro strong {
+  font-size: 14.5px !important;
+}
+.main[data-stage="adjust"] .pointCard {
+  padding: 11px 12px !important;
+}
+.main[data-stage="adjust"] .pointName {
+  font-size: 15px !important;
+  line-height: 1.2 !important;
+  font-weight: 850 !important;
+}
+.main[data-stage="adjust"] .pointReset {
+  font-size: 12.5px !important;
+  min-height: 30px !important;
+  padding: 0 10px !important;
+}
+.main[data-stage="adjust"] .movePill {
+  padding: 8px 10px !important;
+}
+.main[data-stage="adjust"] .moveAxis {
+  font-size: 12.5px !important;
+  line-height: 1.2 !important;
+}
+.main[data-stage="adjust"] .moveNumber {
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  font-weight: 850 !important;
+}
+.main[data-stage="adjust"] .deltaRow {
+  min-height: 30px !important;
+}
+.main[data-stage="adjust"] .deltaName,
+.main[data-stage="adjust"] .deltaValue {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+@media (max-width: 1000px) {
+  .main[data-stage="adjust"] .adjustMiniIntro {
+    font-size: 13px !important;
+  }
+  .main[data-stage="adjust"] .adjustMiniIntro strong {
+    font-size: 14px !important;
+  }
+  .main[data-stage="adjust"] .pointName {
+    font-size: 14px !important;
+  }
+  .main[data-stage="adjust"] .pointReset {
+    font-size: 12px !important;
+  }
+  .main[data-stage="adjust"] .moveAxis {
+    font-size: 12px !important;
+  }
+  .main[data-stage="adjust"] .moveNumber {
+    font-size: 13.5px !important;
+  }
+  .main[data-stage="adjust"] .deltaName,
+  .main[data-stage="adjust"] .deltaValue {
+    font-size: 12.5px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
