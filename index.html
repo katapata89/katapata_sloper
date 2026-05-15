@@ -6019,6 +6019,155 @@ input:focus {
   }
 }
 
+
+
+/* 0508 smartphone half-half layout for adjust/dart/confirm:
+   スマホ横向きでは、調整・ダーツ移動・確定画面の
+   製図枠と横パネルをほぼ半々にする。 */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"] {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas,
+  .main[data-stage="adjust"] .side,
+  .main[data-stage="dart"] .side,
+  .main[data-stage="confirm"] .side {
+    min-width: 0 !important;
+    width: auto !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 430px) and (max-width: 1000px) {
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"] {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 5px !important;
+  }
+}
+
+
+
+/* 0508 measure blocks narrower for sleeve area stability:
+   バスト・ウエスト・背丈の必須3項目を少し細めにして、
+   袖丈/袖山ブロックの表示崩れを起こしにくくする。 */
+@media (max-width: 1000px) {
+  .main[data-stage="measure"] .measureRequiredColumn {
+    max-width: 300px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 134px !important;
+    gap: 4px 8px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 134px !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 1000px) {
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn {
+    max-width: 290px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 126px !important;
+    padding: 5px 6px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 126px !important;
+  }
+
+  .main[data-stage="measure"] .measureOptionalColumn {
+    width: min(100%, 290px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 86px !important;
+    gap: 4px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn {
+    max-width: none !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 108px !important;
+    gap: 3px 5px !important;
+    padding: 4px 5px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputLabel strong {
+    font-size: 10.5px !important;
+    line-height: 1.06 !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputHint {
+    font-size: 6.5px !important;
+    line-height: 1.08 !important;
+    white-space: nowrap !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 108px !important;
+    padding: 0 5px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox input {
+    height: 20px !important;
+    font-size: 13px !important;
+  }
+
+  .main[data-stage="measure"] .measureOptionalColumn {
+    min-width: 86px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 86px !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 430px) and (max-width: 1000px) {
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 82px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 104px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 104px !important;
+  }
+
+  .main[data-stage="measure"] .measureOptionalColumn {
+    min-width: 82px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 82px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
