@@ -6168,6 +6168,32 @@ input:focus {
   }
 }
 
+
+
+/* 0508 smartphone portrait measure canvas narrower:
+   スマホ縦向きでは、寸法入力画面のトルソー/製図枠を少し細めにして中央寄せする。 */
+@media (orientation: portrait) and (max-width: 1000px) {
+  .main[data-stage="measure"] .canvas {
+    width: min(100%, 340px) !important;
+    max-width: calc(100vw - 24px) !important;
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .main[data-stage="measure"] .canvas svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 520px) {
+  .main[data-stage="measure"] .canvas {
+    width: min(100%, 300px) !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
