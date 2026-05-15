@@ -5909,6 +5909,46 @@ input:focus {
   }
 }
 
+
+
+/* 0508 smartphone stagebar larger:
+   スマホ時に最上部の工程ボタン（①寸法入力 ②調整…）を見やすく大きくする。 */
+@media (max-width: 1000px) {
+  .stagebar {
+    gap: 7px !important;
+    padding: 4px 0 3px !important;
+  }
+
+  .stagebar .stage {
+    min-height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 999px !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+    letter-spacing: .01em;
+  }
+}
+
+@media (max-width: 520px) {
+  .stagebar {
+    gap: 6px !important;
+  }
+
+  .stagebar .stage {
+    min-height: 38px !important;
+    padding: 0 12px !important;
+    font-size: 14.5px !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  .stagebar .stage {
+    min-height: 34px !important;
+    padding: 0 11px !important;
+    font-size: 13.5px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
