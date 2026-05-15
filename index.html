@@ -6357,6 +6357,153 @@ input:focus {
   }
 }
 
+
+
+/* 0508 android landscape measure tighten:
+   Androidスマホ横向きで、必須3項目が横に広がりすぎて
+   袖丈・袖山欄が崩れないように、寸法入力ブロックをさらに詰める。 */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  .main[data-stage="measure"] .side {
+    overflow-x: hidden !important;
+  }
+
+  .main[data-stage="measure"] .measureFormGrid {
+    gap: 4px !important;
+  }
+
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 102px !important;
+    gap: 4px !important;
+    align-items: start !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn {
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 96px !important;
+    gap: 3px 5px !important;
+    padding: 4px 5px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputLabel strong {
+    font-size: 10px !important;
+    line-height: 1.05 !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputHint {
+    font-size: 6.2px !important;
+    line-height: 1.05 !important;
+    white-space: nowrap !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 96px !important;
+    padding: 0 4px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox input {
+    height: 19px !important;
+    font-size: 12.5px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox .unit {
+    font-size: 6.8px !important;
+  }
+
+  .main[data-stage="measure"] .measureOptionalColumn {
+    min-width: 102px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 102px !important;
+    padding: 4px !important;
+    border-radius: 10px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveToggle {
+    padding: 4px 5px !important;
+    gap: 4px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveTitle {
+    font-size: 8px !important;
+    line-height: 1.05 !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveLead {
+    display: none !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveCaret {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 13px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveFoldBody {
+    padding: 0 4px 4px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid {
+    grid-template-columns: 1fr !important;
+    gap: 3px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
+    padding: 3px 4px !important;
+    gap: 1px !important;
+    border-radius: 8px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel strong {
+    font-size: 9.2px !important;
+    line-height: 1.0 !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputHint {
+    display: none !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 100% !important;
+    padding: 0 4px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox input {
+    height: 18px !important;
+    font-size: 11.5px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox .unit {
+    font-size: 6.5px !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 430px) and (max-width: 1000px) {
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 98px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 92px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 92px !important;
+  }
+
+  .main[data-stage="measure"] .measureOptionalColumn {
+    min-width: 98px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 98px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
