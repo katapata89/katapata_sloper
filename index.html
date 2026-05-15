@@ -6505,119 +6505,109 @@ input:focus {
 }
 
 
-/* 0508 mobile special layout OFF:
-   スマホ専用の縦積み/圧縮/半々レイアウトをいったんOFFにして、
-   スマホでもPC寄りの通常レイアウトで確認できるようにする。
-   ※切り分け用。スマホでは横スクロールが出る場合あり。 */
-@media (max-width: 1000px) {
+/* 0508 mobile hybrid layout:
+   スマホ縦向きはPC縦細表示風、横向きは2分割表示を維持する。 */
+@media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
   html,
   body {
     height: auto !important;
     min-height: 100% !important;
-    overflow-x: auto !important;
+    overflow-x: hidden !important;
     overflow-y: auto !important;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
   }
 
   .wrap {
-    width: 1180px !important;
-    min-width: 1180px !important;
-    max-width: none !important;
+    width: 100% !important;
+    min-height: 0 !important;
     height: auto !important;
-    min-height: 100vh !important;
-    padding: 12px !important;
+    padding: 6px !important;
+    padding-bottom: 6px !important;
     overflow: visible !important;
   }
 
   .card {
-    width: 1156px !important;
-    max-width: none !important;
-    min-height: calc(100vh - 24px) !important;
+    width: min(100%, 430px) !important;
+    max-width: calc(100vw - 12px) !important;
+    min-height: 0 !important;
     height: auto !important;
-    display: grid !important;
-    grid-template-rows: auto 1fr !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
     overflow: visible !important;
-    border-radius: 20px !important;
+    border-radius: 18px !important;
   }
 
   .top,
   .appTop {
-    position: relative !important;
-    top: auto !important;
-    z-index: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    padding: 10px 14px !important;
-    gap: 12px !important;
-    background: rgba(255,255,255,.95) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 80 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    padding: 7px 9px !important;
+    background: rgba(255,255,255,.96) !important;
+    backdrop-filter: blur(8px);
   }
 
   .appTopMain {
-    min-width: 0 !important;
     display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr) !important;
-    align-items: center !important;
-    gap: 12px !important;
-    width: 100% !important;
-  }
-
-  .appBrand {
-    display: block !important;
-    margin: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
   }
 
   .appBrand h1 {
-    font-size: 18px !important;
-    letter-spacing: .12em !important;
+    font-size: 15px !important;
   }
 
   .appBrand .note {
-    display: block !important;
-    font-size: 9px !important;
+    display: none !important;
   }
 
   .stagebar,
   .appStagebar {
-    margin: 0 !important;
-    display: grid !important;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    display: flex !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap !important;
     gap: 6px !important;
-    overflow: visible !important;
-    padding: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 3px 0 2px !important;
   }
 
   .stagebar .stage,
   .appStagebar .stage {
-    min-width: 0 !important;
+    flex: 0 0 auto !important;
     width: auto !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    padding: 0 8px !important;
-    border-radius: 12px !important;
-    font-size: 10.5px !important;
+    min-width: 74px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 11px !important;
+    border-radius: 999px !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
     white-space: nowrap !important;
   }
 
   .stagebar .stage span,
   .appStagebar .stage span {
-    width: 15px !important;
-    height: 15px !important;
-    font-size: 8.5px !important;
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 10px !important;
   }
 
   #resetBtn,
   .appReset {
-    position: static !important;
     width: auto !important;
-    min-width: auto !important;
-    max-width: none !important;
-    flex: 0 0 auto !important;
-    height: 30px !important;
-    padding: 0 10px !important;
-    border-radius: 12px !important;
-    font-size: 10px !important;
-    margin: 0 !important;
+    min-width: 66px !important;
+    max-width: 90px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 11px !important;
+    border-radius: 999px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
   }
 
   .main,
@@ -6627,17 +6617,14 @@ input:focus {
   .main[data-stage="confirm"],
   .main[data-stage="output"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 360px !important;
-    grid-template-rows: none !important;
-    gap: 14px !important;
-    padding: 14px !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 7px !important;
+    padding: 8px !important;
+    padding-bottom: 8px !important;
     height: auto !important;
-    min-height: 720px !important;
+    min-height: 0 !important;
     overflow: visible !important;
-  }
-
-  .main[data-stage="measure"] {
-    grid-template-columns: minmax(0, 1fr) 360px !important;
   }
 
   .canvas,
@@ -6646,42 +6633,26 @@ input:focus {
   .main[data-stage="dart"] .canvas,
   .main[data-stage="confirm"] .canvas,
   .main[data-stage="output"] .canvas {
-    width: auto !important;
-    max-width: none !important;
-    height: auto !important;
-    min-height: 700px !important;
-    max-height: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 250px !important;
+    min-height: 220px !important;
+    max-height: 40svh !important;
     justify-self: stretch !important;
-    border-radius: 20px !important;
+    border-radius: 14px !important;
     overflow: hidden !important;
+    margin-bottom: 0 !important;
   }
 
   .main[data-stage="measure"] .canvas {
-    min-height: 700px !important;
+    height: 292px !important;
+    min-height: 260px !important;
+    max-height: 44svh !important;
   }
 
-  .main[data-stage="measure"] .measureCanvas {
-    padding: 10px 12px 8px !important;
-  }
-
-  .measureHero {
-    width: min(100%, 760px) !important;
-    max-width: none !important;
-  }
-
-  .measureFigureGrid {
-    grid-template-columns: repeat(2, minmax(240px, 1fr)) !important;
-    gap: 8px !important;
-  }
-
-  .torsoWrap {
-    width: 232px !important;
-    height: 438px !important;
-  }
-
-  .torsoWrap.side {
-    width: 131px !important;
-    height: 438px !important;
+  .canvas svg {
+    width: 100% !important;
+    height: 100% !important;
   }
 
   .side,
@@ -6690,61 +6661,70 @@ input:focus {
   .main[data-stage="dart"] .side,
   .main[data-stage="confirm"] .side,
   .main[data-stage="output"] .side {
-    display: grid !important;
-    width: auto !important;
-    max-width: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
     height: auto !important;
     max-height: none !important;
     overflow: visible !important;
     padding: 0 !important;
-    gap: 12px !important;
-    align-content: start !important;
+    margin-bottom: 0 !important;
   }
 
   .side > .panel,
   .panel {
-    width: auto !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 14px !important;
-    border-radius: 18px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 7px !important;
+    padding: 10px 11px !important;
+    border-radius: 15px !important;
+  }
+
+  .side > .panel:last-child {
+    margin-bottom: 0 !important;
   }
 
   .panelTitleRow {
     position: relative !important;
     top: auto !important;
     z-index: auto !important;
-    margin: 0 0 10px !important;
+    margin: 0 0 8px !important;
     padding: 0 !important;
     background: transparent !important;
     border-bottom: 0 !important;
   }
 
   .measureCompactLayout {
-    grid-template-columns: minmax(0, 1fr) minmax(116px, 0.76fr) !important;
-    gap: 8px !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
   }
 
   .measureRequiredColumn,
-  .measureOptionalColumn {
-    width: auto !important;
-    max-width: none !important;
-    margin: 0 !important;
+  .measureOptionalColumn,
+  .measureAction {
+    width: min(100%, 330px) !important;
+    max-width: 330px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .measureRequiredColumn .measureInputCard,
   .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
-    grid-template-columns: none !important;
     display: grid !important;
-    gap: 3px !important;
+    grid-template-columns: minmax(0, 1fr) 132px !important;
+    gap: 5px 8px !important;
+    align-items: center !important;
     padding: 6px 7px !important;
   }
 
   .measureRequiredColumn .measureInputBox,
   .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
-    width: 100% !important;
-    justify-self: stretch !important;
+    width: 132px !important;
+    justify-self: end !important;
   }
 
   .optionalSleeveBox {
@@ -6752,12 +6732,76 @@ input:focus {
   }
 
   .optionalSleeveGrid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
   }
 
+  .earlyLoadBox:last-child,
+  .saveHelpBox:last-child,
+  .saveMessage:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
+  .card {
+    width: min(100%, 410px) !important;
+  }
+
+  .canvas,
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas,
+  .main[data-stage="output"] .canvas {
+    height: 235px !important;
+    min-height: 205px !important;
+  }
+
+  .main[data-stage="measure"] .canvas {
+    height: 276px !important;
+    min-height: 248px !important;
+  }
+
+  .measureRequiredColumn,
+  .measureOptionalColumn,
   .measureAction {
-    width: 100% !important;
-    margin: 0 !important;
+    width: min(100%, 315px) !important;
+    max-width: 315px !important;
+  }
+
+  .measureRequiredColumn .measureInputCard,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 124px !important;
+  }
+
+  .measureRequiredColumn .measureInputBox,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 124px !important;
+  }
+}
+
+/* 横向きスマホは、既存の2分割レイアウトを残す。
+   ただし下端の余白だけ少し控えめにする。 */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) and (pointer: coarse) {
+  .wrap {
+    padding-bottom: 6px !important;
+  }
+
+  .card {
+    min-height: 0 !important;
+  }
+
+  .main,
+  .main[data-stage="measure"],
+  .main[data-stage="adjust"],
+  .main[data-stage="dart"],
+  .main[data-stage="confirm"],
+  .main[data-stage="output"] {
+    padding-bottom: 6px !important;
+  }
+
+  .side {
+    padding-bottom: 0 !important;
   }
 }
 
@@ -9482,7 +9526,7 @@ function relocateResetButtonForPortrait() {
  const home = document.getElementById('resetBtnHome');
  const stagebar = document.querySelector('.appStagebar');
  if (!resetBtn || !home || !home.parentElement || !stagebar) return;
- const shouldInline = false;
+ const shouldInline = window.matchMedia('(orientation: portrait) and (max-width: 1000px)').matches;
  if (shouldInline) {
   if (resetBtn.parentElement !== stagebar) stagebar.appendChild(resetBtn);
   resetBtn.classList.add('inStagebar');
