@@ -6194,6 +6194,63 @@ input:focus {
   }
 }
 
+
+/* 0508 portrait measure canvas wider again:
+   前回の細め調整でトルソーが見切れたため、スマホ縦向きの寸法入力トルソー枠を少し広げる。 */
+@media (orientation: portrait) and (max-width: 1000px) {
+  .main[data-stage="measure"] .canvas {
+    width: min(100%, 390px) !important;
+    max-width: calc(100vw - 14px) !important;
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .main[data-stage="measure"] .canvas svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 520px) {
+  .main[data-stage="measure"] .canvas {
+    width: min(100%, 360px) !important;
+    max-width: calc(100vw - 12px) !important;
+  }
+}
+
+
+
+/* 0508 portrait reset button in stagebar:
+   スマホ縦向きでは、初期化ボタンを工程ボタン列の端に入れる。 */
+#resetBtn.inStagebar {
+  margin: 0;
+}
+@media (orientation: portrait) and (max-width: 1000px) {
+  .appStagebar.hasInlineReset {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+  #resetBtn.inStagebar {
+    width: 100%;
+    min-width: 0;
+    height: 30px;
+    padding: 0 8px;
+    border-radius: 12px;
+    font-size: 10.5px;
+    font-weight: 850;
+    white-space: nowrap;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+}
+@media (orientation: portrait) and (max-width: 520px) {
+  #resetBtn.inStagebar {
+    height: 32px;
+    font-size: 11px;
+    padding: 0 8px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
@@ -6229,7 +6286,7 @@ input:focus {
      <button class="stage" data-stage="output" type="button"><span>5</span>出力</button>
     </div>
    </div>
-   <button id="resetBtn" class="sub appReset">初期化</button>
+   <button id="resetBtn" class="sub appReset">初期化</button><span id="resetBtnHome" hidden aria-hidden="true"></span>
   </div>
   <div class="main">
    <div class="canvas">
@@ -13233,6 +13290,10 @@ window.addEventListener('pointercancel', () => {
  endScreenPan();
  dragging = null;
 });
+relocateResetButtonForPortrait();
+window.addEventListener('resize', relocateResetButtonForPortrait);
+window.addEventListener('orientationchange', relocateResetButtonForPortrait);
+
 document.getElementById('resetBtn').addEventListener('click', () => {
  const ok = window.confirm('現在の作業内容を初期化します。ブラウザ保存・自動保存データは削除しません。よろしいですか？');
  if (!ok) return;
