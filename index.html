@@ -6815,7 +6815,7 @@ input:focus {
   }
 
   .wrap {
-    transform: scale(1.20);
+    transform: scale(1.25);
     transform-origin: top center;
     margin-top: 4px;
     padding-bottom: 64px !important;
@@ -6825,9 +6825,310 @@ input:focus {
 /* iPhone mini など細い画面では少し控えめ */
 @media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
   .wrap {
-    transform: scale(1.18);
+    transform: scale(1.23);
     transform-origin: top center;
     padding-bottom: 58px !important;
+  }
+}
+
+
+/* 0508 mobile portrait zoom scroll fix:
+   transform拡大で見た目だけ大きくなり、下部がスクロール範囲外になる問題を補正。 */
+@media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
+  html,
+  body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  .wrap {
+    padding-bottom: 360px !important;
+  }
+
+  .wrap::after {
+    content: "";
+    display: block;
+    height: 220px;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
+  .wrap {
+    padding-bottom: 330px !important;
+  }
+
+  .wrap::after {
+    height: 200px;
+  }
+}
+
+
+
+/* 0508 portrait readability without global scale:
+   スマホ縦向きでは全体scaleをやめ、
+   文字・ボタン・入力欄を大きくしつつ、トルソー枠は少し控えめにする。 */
+@media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
+  html, body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  .wrap {
+    transform: none !important;
+    margin-top: 0 !important;
+    padding-bottom: 14px !important;
+  }
+
+  .wrap::after {
+    content: none !important;
+    display: none !important;
+    height: 0 !important;
+  }
+
+  .appBrand h1 {
+    font-size: 16px !important;
+  }
+
+  .stagebar .stage,
+  .appStagebar .stage {
+    min-width: 78px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 12px !important;
+    font-size: 13.5px !important;
+    font-weight: 900 !important;
+  }
+
+  #resetBtn,
+  .appReset {
+    min-width: 70px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    font-size: 12.5px !important;
+    font-weight: 850 !important;
+  }
+
+  .main[data-stage="measure"] .canvas {
+    height: 272px !important;
+    min-height: 240px !important;
+    max-height: 40svh !important;
+  }
+
+  .main[data-stage="measure"] .measureCanvas {
+    padding: 7px 8px 6px !important;
+  }
+
+  .measureHero {
+    gap: 4px !important;
+  }
+
+  .measureHeroTitle {
+    padding: 5px 9px !important;
+  }
+
+  .measureHeroTitle strong {
+    font-size: 14px !important;
+  }
+
+  .measureFigureGrid {
+    gap: 5px !important;
+    align-items: end !important;
+  }
+
+  .torsoWrap {
+    width: 176px !important;
+    height: 332px !important;
+  }
+
+  .torsoWrap.side {
+    width: 100px !important;
+    height: 332px !important;
+  }
+
+  .panelTitleRow h2,
+  .panel h2,
+  .measureEntryTitle {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .measureEntryLead,
+  .note,
+  .stageCaption,
+  .toolHint,
+  .metricNote,
+  .confirmMiniText,
+  .outputMiniText,
+  .adjustMiniIntro,
+  .dartMiniText,
+  .measureMiniNote,
+  .saveHelpBox,
+  .saveMessage,
+  .earlyLoadBox,
+  .measureInlineMessage,
+  .zeroState,
+  .deltaNote {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  .measureRequiredColumn,
+  .measureOptionalColumn,
+  .measureAction {
+    width: min(100%, 330px) !important;
+    max-width: 330px !important;
+  }
+
+  .measureRequiredColumn .measureInputCard,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 136px !important;
+    gap: 6px 9px !important;
+    padding: 7px 8px !important;
+  }
+
+  .measureInputLabel strong,
+  .main[data-stage="measure"] .measureInputLabel strong,
+  .pointName,
+  .confirmStatusName,
+  .outputStateName,
+  .deltaName,
+  .compactSleeveStatLabel,
+  .adjustBodyMetricName {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+
+  .measureInputHint {
+    font-size: 9px !important;
+    line-height: 1.3 !important;
+  }
+
+  .measureRequiredColumn .measureInputBox,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 136px !important;
+  }
+
+  .measureInputBox input,
+  .measureInputBox select,
+  .measureInputBox button,
+  .percentRow input {
+    font-size: 16px !important;
+  }
+
+  .measureInputBox .unit {
+    font-size: 10px !important;
+  }
+
+  .measureAction,
+  .sideActions button,
+  .outputBackRow button,
+  .confirmActionRow button,
+  .exportActions button,
+  .printActions button,
+  .panelTopAction,
+  .miniReset,
+  .pointReset {
+    font-size: 12.5px !important;
+    font-weight: 850 !important;
+    min-height: 34px !important;
+  }
+
+  .moveAxis,
+  .miniChip,
+  .confirmStatusValue,
+  .outputStateValue,
+  .deltaValue,
+  .adjustBodyMetricValue,
+  .compactSleeveStatValue,
+  .moveNumber,
+  .label,
+  .dim-text,
+  .split-text,
+  .delta-text,
+  .logText {
+    font-size: 12.5px !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
+  .main[data-stage="measure"] .canvas {
+    height: 258px !important;
+    min-height: 232px !important;
+  }
+
+  .torsoWrap {
+    width: 165px !important;
+    height: 312px !important;
+  }
+
+  .torsoWrap.side {
+    width: 94px !important;
+    height: 312px !important;
+  }
+
+  .measureRequiredColumn,
+  .measureOptionalColumn,
+  .measureAction {
+    width: min(100%, 320px) !important;
+    max-width: 320px !important;
+  }
+
+  .measureRequiredColumn .measureInputCard,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 130px !important;
+  }
+
+  .measureRequiredColumn .measureInputBox,
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 130px !important;
+  }
+}
+
+
+
+/* 0508 portrait torso balance tweak:
+   スマホ縦向きで左の前向きトルソーだけ大きく見えすぎるため、
+   前・横トルソーのサイズバランスをもう少し控えめに整える。 */
+@media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
+  .main[data-stage="measure"] .canvas {
+    height: 264px !important;
+    min-height: 236px !important;
+    max-height: 39svh !important;
+  }
+
+  .measureFigureGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .70fr) !important;
+    gap: 4px !important;
+    align-items: end !important;
+  }
+
+  .torsoWrap {
+    width: 156px !important;
+    height: 294px !important;
+  }
+
+  .torsoWrap.side {
+    width: 88px !important;
+    height: 294px !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
+  .main[data-stage="measure"] .canvas {
+    height: 252px !important;
+    min-height: 228px !important;
+  }
+
+  .torsoWrap {
+    width: 148px !important;
+    height: 280px !important;
+  }
+
+  .torsoWrap.side {
+    width: 84px !important;
+    height: 280px !important;
   }
 }
 
