@@ -7134,57 +7134,25 @@ input:focus {
 
 
 
-/* 0508 portrait full-scale 1.5x:
-   スマホ縦向きでは、全体をほぼ等倍のまま1.5倍表示に近づける。
-   card全体を拡大し、幅を逆算して収める。 */
+/* 0508 portrait taller drafting area for stages 2/3/4:
+   スマホ縦向きで、②調整・③ダーツ移動・④確定 の製図部分を縦長にする。 */
 @media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
-  html, body {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    height: auto !important;
-    min-height: 100% !important;
-  }
-
-  .wrap {
-    width: 100vw !important;
-    max-width: none !important;
-    min-height: 0 !important;
-    height: auto !important;
-    padding: 4px !important;
-    padding-bottom: 720px !important;
-    overflow: visible !important;
-  }
-
-  .wrap::after {
-    content: "";
-    display: block;
-    height: 520px;
-  }
-
-  .card {
-    width: calc((100vw - 8px) / 1.5) !important;
-    max-width: none !important;
-    min-height: 0 !important;
-    height: auto !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    transform: scale(1.5) !important;
-    transform-origin: top center !important;
-    overflow: visible !important;
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas {
+    height: 320px !important;
+    min-height: 290px !important;
+    max-height: 48svh !important;
   }
 }
 
 @media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
-  .wrap {
-    padding-bottom: 680px !important;
-  }
-
-  .wrap::after {
-    height: 500px;
-  }
-
-  .card {
-    width: calc((100vw - 6px) / 1.5) !important;
+  .main[data-stage="adjust"] .canvas,
+  .main[data-stage="dart"] .canvas,
+  .main[data-stage="confirm"] .canvas {
+    height: 305px !important;
+    min-height: 280px !important;
+    max-height: 46svh !important;
   }
 }
 
