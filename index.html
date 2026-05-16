@@ -7207,6 +7207,93 @@ input:focus {
   min-width: 72px;
 }
 
+
+
+/* 0516 fix: smartphone portrait optional sleeve inputs overlap
+   縦スマホで袖丈・袖山カード内のラベルと入力欄が重ならないようにする。 */
+@media (orientation: portrait) and (max-width: 900px) {
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+  }
+
+  .main[data-stage="measure"] .measureOptionalColumn {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 8px 9px 10px !important;
+    overflow: visible !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid {
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 132px !important;
+    align-items: center !important;
+    gap: 5px 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 6px 7px !important;
+    overflow: visible !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel {
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    align-items: baseline !important;
+    justify-content: start !important;
+    gap: 5px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel strong {
+    white-space: nowrap !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputHint {
+    display: inline !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+    font-size: 8.5px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 132px !important;
+    max-width: 132px !important;
+    justify-self: end !important;
+    box-sizing: border-box !important;
+    padding: 0 7px !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) {
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 118px !important;
+    gap: 5px 6px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 118px !important;
+    max-width: 118px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputHint {
+    font-size: 8px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
