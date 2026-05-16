@@ -7669,6 +7669,57 @@ input:focus {
   }
 }
 
+
+
+/* 0516 fix4: create button moved to panel header + blank measurement defaults */
+.measurePanelHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(118px, 144px);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.measurePanelHead h2 {
+  margin: 0;
+}
+.measureHeaderAction {
+  width: 100%;
+  min-height: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-size: 12px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+.main[data-stage="measure"] .measureCreateRow {
+  display: none !important;
+}
+@media (orientation: portrait), (max-width: 859px) {
+  .main[data-stage="measure"] .measurePanelHead {
+    grid-template-columns: minmax(0, 1fr) minmax(112px, 136px);
+    gap: 8px;
+    margin-bottom: 7px;
+  }
+  .main[data-stage="measure"] .measureHeaderAction {
+    min-height: 36px;
+    height: 36px;
+    border-radius: 11px;
+    font-size: 11px;
+  }
+  .main[data-stage="measure"] .measureInputBox input:placeholder-shown {
+    color: transparent;
+  }
+}
+@media (max-width: 380px) {
+  .main[data-stage="measure"] .measurePanelHead {
+    grid-template-columns: minmax(0, 1fr) 116px;
+  }
+  .main[data-stage="measure"] .measureHeaderAction {
+    font-size: 10.5px;
+    padding: 0 8px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
@@ -7835,9 +7886,9 @@ let dartSplits = {
 };
 
 let measurementState = {
- bust: 84,
- waist: 64,
- backLength: 38,
+ bust: '',
+ waist: '',
+ backLength: '',
  sleeveLength: '',
  sleeveCap: '',
 };
@@ -10507,18 +10558,18 @@ function clonePlain(value) {
 }
 function normalizeMeasurementSave(src = {}) {
  const out = {
-  bust: 84,
-  waist: 64,
-  backLength: 38,
+  bust: '',
+  waist: '',
+  backLength: '',
   sleeveLength: '',
   sleeveCap: '',
  };
  for (const key of Object.keys(out)) {
   if (src[key] === '' || src[key] == null) {
-   out[key] = (key === 'sleeveLength' || key === 'sleeveCap') ? '' : out[key];
+   out[key] = '';
   } else {
    const n = Number(src[key]);
-   out[key] = Number.isFinite(n) ? n : out[key];
+   out[key] = Number.isFinite(n) ? n : '';
   }
  }
  return out;
@@ -14818,7 +14869,10 @@ function measureMiniNoteText() {
 function measureStartPanelHtml() {
  return `
   <div class="panel measureEntryPanel">
-   <h2>寸法入力</h2>
+   <div class="measurePanelHead">
+    <h2>寸法入力</h2>
+    <button type="button" class="measureAction measureHeaderAction" onclick="createPatternFromMeasurements()">${measureActionLabel()}</button>
+   </div>
    <div class="measureEntryTop">
         <p class="measureEntryTitle">必要寸法をまとめて入力</p>
     <p class="measureEntryLead">基本寸法を入力します。袖は必要な場合だけ入力します。</p>
@@ -14846,9 +14900,7 @@ function measureStartPanelHtml() {
        </div>
       </div>
      </div>
-     <div class="measureCreateRow">
-      <button type="button" class="measureAction" onclick="createPatternFromMeasurements()">${measureActionLabel()}</button>
-     </div>
+
     </div>
     <div id="measureInlineMessage" class="measureInlineMessage"></div>
    </div>
@@ -15444,9 +15496,9 @@ document.getElementById('resetBtn').addEventListener('click', () => {
  if (!ok) return;
 
  measurementState = {
-  bust: 84,
-  waist: 64,
-  backLength: 38,
+  bust: '',
+  waist: '',
+  backLength: '',
   sleeveLength: '',
   sleeveCap: '',
  };
