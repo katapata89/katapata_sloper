@@ -7842,6 +7842,97 @@ input:focus {
   }
 }
 
+
+
+/* 0516 fix8: 横画面でトルソー表示を潰しすぎず、袖入力は6:4寄りを維持 */
+@media (orientation: landscape) and (min-width: 701px) {
+  .main[data-stage="measure"] {
+    grid-template-columns: minmax(620px, 1fr) minmax(390px, 410px) !important;
+    gap: 12px !important;
+  }
+
+  .main[data-stage="measure"] .canvas {
+    min-width: 0 !important;
+  }
+
+  .main[data-stage="measure"] .side {
+    min-width: 390px !important;
+    max-width: 410px !important;
+  }
+
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 3fr) minmax(150px, 2fr) !important;
+    gap: 8px !important;
+    align-items: start !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 100px !important;
+    gap: 4px 6px !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 78px !important;
+    gap: 4px !important;
+    padding: 7px 7px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+  }
+
+  .main[data-stage="measure"] .measureFigureGrid {
+    grid-template-columns: minmax(260px, 1fr) minmax(130px, .58fr) !important;
+    gap: 10px !important;
+    justify-content: center !important;
+    align-items: end !important;
+  }
+
+  .main[data-stage="measure"] .torsoWrap {
+    width: min(32vw, 232px) !important;
+    height: auto !important;
+    aspect-ratio: 594 / 1122 !important;
+  }
+
+  .main[data-stage="measure"] .torsoWrap.side {
+    width: min(18vw, 131px) !important;
+    height: auto !important;
+    aspect-ratio: 334 / 1118 !important;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 701px) and (max-width: 1180px) {
+  .main[data-stage="measure"] {
+    grid-template-columns: minmax(560px, 1fr) minmax(380px, 400px) !important;
+  }
+  .main[data-stage="measure"] .side {
+    min-width: 380px !important;
+    max-width: 400px !important;
+  }
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 3fr) minmax(144px, 2fr) !important;
+    gap: 7px !important;
+  }
+  .main[data-stage="measure"] .measureFigureGrid {
+    grid-template-columns: minmax(230px, 1fr) minmax(112px, .58fr) !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
