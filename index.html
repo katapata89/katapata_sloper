@@ -7933,6 +7933,73 @@ input:focus {
   }
 }
 
+
+
+/* 0516 fix: 寸法入力画面の左右トルソーを「高さ基準」で揃える
+   以前の調整では左右それぞれを幅基準で縮めていたため、画面幅によって
+   片方だけ大きく/小さく見えることがあった。ここでは同じ高さを基準にする。 */
+.main[data-stage="measure"] .measureFigureGrid {
+  align-items: end !important;
+  justify-items: center !important;
+}
+.main[data-stage="measure"] .torsoWrap,
+.main[data-stage="measure"] .torsoWrap.side {
+  height: var(--measure-torso-h, 438px) !important;
+  max-height: var(--measure-torso-h, 438px) !important;
+  min-height: 0 !important;
+  flex: 0 0 auto !important;
+}
+.main[data-stage="measure"] .torsoWrap {
+  width: calc(var(--measure-torso-h, 438px) * 594 / 1122) !important;
+  max-width: calc(var(--measure-torso-h, 438px) * 594 / 1122) !important;
+  aspect-ratio: 594 / 1122 !important;
+}
+.main[data-stage="measure"] .torsoWrap.side {
+  width: calc(var(--measure-torso-h, 438px) * 334 / 1118) !important;
+  max-width: calc(var(--measure-torso-h, 438px) * 334 / 1118) !important;
+  aspect-ratio: 334 / 1118 !important;
+}
+.main[data-stage="measure"] .torsoWrap img,
+.main[data-stage="measure"] .torsoWrap.side img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+@media (orientation: landscape) and (min-width: 701px) and (max-width: 1180px) {
+  .main[data-stage="measure"] .measureFigureGrid {
+    --measure-torso-h: min(51svh, 396px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, .58fr) !important;
+    gap: 10px !important;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 1181px) {
+  .main[data-stage="measure"] .measureFigureGrid {
+    --measure-torso-h: min(54svh, 438px);
+  }
+}
+
+@media (orientation: portrait) and (max-width: 1000px) and (pointer: coarse) {
+  .main[data-stage="measure"] .measureFigureGrid {
+    --measure-torso-h: 280px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .70fr) !important;
+    gap: 4px !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 430px) and (pointer: coarse) {
+  .main[data-stage="measure"] .measureFigureGrid {
+    --measure-torso-h: 272px;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 380px) and (pointer: coarse) {
+  .main[data-stage="measure"] .measureFigureGrid {
+    --measure-torso-h: 258px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
