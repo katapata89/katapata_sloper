@@ -7720,6 +7720,36 @@ input:focus {
   }
 }
 
+
+
+/* 0516: 寸法入力画面の縦詰め調整（背丈が隠れないように） */
+.main[data-stage="measure"] .measureEntryTop {
+  margin-top: 0;
+}
+.main[data-stage="measure"] .measureEntryLead {
+  margin-bottom: 2px;
+}
+.main[data-stage="measure"] .measureMiniNote {
+  margin-top: 4px;
+}
+.main[data-stage="measure"] .earlyLoadBox {
+  margin-top: 4px;
+}
+@media (max-width: 560px), (orientation: portrait) {
+  .main[data-stage="measure"] .measureEntryPanel {
+    gap: 4px;
+  }
+  .main[data-stage="measure"] .measureFormGrid,
+  .main[data-stage="measure"] .measureRequiredColumn,
+  .main[data-stage="measure"] .optionalSleeveGrid {
+    gap: 4px;
+  }
+  .main[data-stage="measure"] .measureInputCard {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
@@ -14874,7 +14904,6 @@ function measureStartPanelHtml() {
     <button type="button" class="measureAction measureHeaderAction" onclick="createPatternFromMeasurements()">${measureActionLabel()}</button>
    </div>
    <div class="measureEntryTop">
-        <p class="measureEntryTitle">必要寸法をまとめて入力</p>
     <p class="measureEntryLead">基本寸法を入力します。袖は必要な場合だけ入力します。</p>
    </div>
    <div class="measureForm measureFormGrid">
@@ -14939,7 +14968,6 @@ function earlyLoadBoxHtml() {
      </div>
     </div>
     <input id="stateImportInput" type="file" accept=".katapata,application/json,application/katapata+json" style="display:none" onchange="handleImportStateJson(event)">
-    <div id="saveMessage" class="saveMessage">${messageText}</div>
    </div>
  `;
 }
