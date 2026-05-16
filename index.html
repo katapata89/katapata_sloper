@@ -7530,6 +7530,145 @@ input:focus {
   }
 }
 
+
+
+/* 0516 fix3: 寸法入力の「原型を作成」ボタンを入力ブロック内に固定表示 */
+@media (orientation: portrait) and (max-width: 700px) {
+  .main[data-stage="measure"] .measureFormGrid {
+    display: grid !important;
+    gap: 5px !important;
+  }
+  .main[data-stage="measure"] .measureCompactLayout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 108px !important;
+    grid-template-rows: auto auto !important;
+    gap: 5px 6px !important;
+    align-items: start !important;
+    overflow: visible !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn {
+    gap: 4px !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    min-height: 0 !important;
+    padding: 5px 6px !important;
+    grid-template-columns: minmax(0, 1fr) 88px !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputLabel strong {
+    font-size: 11.5px !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputHint {
+    font-size: 7.4px !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 88px !important;
+    min-width: 88px !important;
+    max-width: 88px !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox input {
+    height: 24px !important;
+    font-size: 14px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 108px !important;
+    max-width: 108px !important;
+    padding: 5px !important;
+    border-radius: 13px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveTitle {
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveGrid {
+    gap: 5px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
+    padding: 5px !important;
+    gap: 2px !important;
+    border-radius: 11px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel strong {
+    font-size: 11.5px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputHint {
+    font-size: 7px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 72px !important;
+    min-width: 72px !important;
+    max-width: 72px !important;
+    padding: 0 4px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox input {
+    height: 23px !important;
+    font-size: 14px !important;
+  }
+  .main[data-stage="measure"] .measureCreateRow {
+    grid-column: 1 / -1 !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 36px !important;
+    margin: 1px 0 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    z-index: 20 !important;
+  }
+  .main[data-stage="measure"] .measureCreateRow .measureAction,
+  .main[data-stage="measure"] button.measureAction {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    border-radius: 14px !important;
+    background: #111 !important;
+    color: #fff !important;
+    font-size: 12.5px !important;
+    font-weight: 950 !important;
+    line-height: 1 !important;
+    transform: none !important;
+  }
+  .main[data-stage="measure"] .measureMiniNote {
+    margin-top: 4px !important;
+    padding: 5px 7px !important;
+    font-size: 9.5px !important;
+    line-height: 1.25 !important;
+  }
+  .main[data-stage="measure"] .earlyLoadBox {
+    margin-top: 8px !important;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 380px) {
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 100px !important;
+    gap: 5px !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputCard {
+    grid-template-columns: minmax(0, 1fr) 82px !important;
+  }
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 82px !important;
+    min-width: 82px !important;
+    max-width: 82px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 100px !important;
+    max-width: 100px !important;
+  }
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
+  }
+}
+
 </style>
 </head>
 <body class="opening-active">
@@ -14707,8 +14846,10 @@ function measureStartPanelHtml() {
        </div>
       </div>
      </div>
+     <div class="measureCreateRow">
+      <button type="button" class="measureAction" onclick="createPatternFromMeasurements()">${measureActionLabel()}</button>
+     </div>
     </div>
-    <button type="button" class="measureAction" onclick="createPatternFromMeasurements()">${measureActionLabel()}</button>
     <div id="measureInlineMessage" class="measureInlineMessage"></div>
    </div>
    <div class="measureMiniNote">${measureMiniNoteText()}</div>
