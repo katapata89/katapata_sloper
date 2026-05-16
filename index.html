@@ -14626,6 +14626,84 @@ function startA4TiledPrint() {
   }
 }
 
+
+
+/* 0516 fix6: 寸法入力の横パネルを少し広げ、左のトルソー表示を少し狭める */
+@media (orientation: landscape) and (min-width: 701px) {
+  .main[data-stage="measure"] {
+    grid-template-columns: minmax(0, 0.72fr) minmax(410px, 430px) !important;
+    gap: 12px !important;
+  }
+
+  .main[data-stage="measure"] .canvas {
+    min-width: 0 !important;
+  }
+
+  .main[data-stage="measure"] .side {
+    min-width: 410px !important;
+    max-width: 430px !important;
+  }
+
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 148px !important;
+    gap: 8px !important;
+    align-items: start !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 148px !important;
+    max-width: 148px !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputCard {
+    padding: 7px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputLabel {
+    gap: 5px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputHint {
+    font-size: 7px !important;
+    white-space: nowrap !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveGrid .measureInputBox {
+    width: 92px !important;
+    min-width: 92px !important;
+    max-width: 92px !important;
+    justify-self: center !important;
+  }
+
+  .main[data-stage="measure"] .measureRequiredColumn .measureInputBox {
+    width: 116px !important;
+    min-width: 116px !important;
+    max-width: 116px !important;
+    justify-self: end !important;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 701px) and (max-width: 1180px) {
+  .main[data-stage="measure"] {
+    grid-template-columns: minmax(0, 0.66fr) minmax(390px, 420px) !important;
+  }
+
+  .main[data-stage="measure"] .side {
+    min-width: 390px !important;
+    max-width: 420px !important;
+  }
+
+  .main[data-stage="measure"] .measureCompactLayout {
+    grid-template-columns: minmax(0, 1fr) 142px !important;
+  }
+
+  .main[data-stage="measure"] .optionalSleeveBox {
+    width: 142px !important;
+    max-width: 142px !important;
+  }
+}
 </style>
 </head>
 <body>
