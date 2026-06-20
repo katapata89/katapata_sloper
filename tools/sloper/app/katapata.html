@@ -4703,4 +4703,179 @@ window.addEventListener("DOMContentLoaded", () => {
   } catch (_) {}
 })();
 </script>
+<script id="katapata-mobile-tap-fix-v39">
+(function katapataInstallMobileTapFixV39(){
+  'use strict';
+  if (window.katapataMobileTapFixV39Installed) return;
+  window.katapataMobileTapFixV39Installed = true;
+
+  function ensureViewport(){
+    try {
+      var meta = document.querySelector('meta[name="viewport"]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', 'viewport');
+        (document.head || document.documentElement).appendChild(meta);
+      }
+      meta.setAttribute('content', 'width=device-width, initial-scale=1, viewport-fit=cover');
+    } catch (_) {}
+  }
+
+  function ensureStyle(){
+    if (document.getElementById('katapataMobileTapFixV39Style')) return;
+    var style = document.createElement('style');
+    style.id = 'katapataMobileTapFixV39Style';
+    style.textContent = `
+      .appStagebar,
+      .appStagebar .stage,
+      #katapataOutputPageV22,
+      #katapataOutputPageV22 button,
+      #katapataV21FileOnlyPanel button,
+      .katapataV21FileOnlyPanel button{
+        touch-action:manipulation !important;
+        -webkit-tap-highlight-color:rgba(0,0,0,0) !important;
+      }
+      .appStagebar .stage,
+      #katapataOutputPageV22 button,
+      #katapataV21FileOnlyPanel button,
+      .katapataV21FileOnlyPanel button{
+        position:relative !important;
+        z-index:5 !important;
+      }
+      body:not(.opening-active) #openingOverlay{
+        pointer-events:none !important;
+      }
+    `;
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  function stage(){
+    try {
+      var main = document.querySelector('.main');
+      return main ? String(main.getAttribute('data-stage') || '') : '';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function controlFrom(target){
+    if (!target || !target.closest) return null;
+    return target.closest(
+      '.appStagebar .stage[data-stage], ' +
+      '#katapataOutputPageV22 [data-v22-tab], ' +
+      '#katapataOutputPageV22 [data-v22-sample], ' +
+      '#katapataOutputPageV22 [data-v22-buy], ' +
+      '#katapataOutputPageV22 [data-v22-load], ' +
+      '#katapataOutputPageV22 [data-v22-pdf], ' +
+      '#katapataOutputPageV22 [data-v22-part], ' +
+      '#katapataV21FileOnlyPanel [data-katapata-v21-load], ' +
+      '#katapataV21FileOnlyPanel [data-katapata-v21-pdf], ' +
+      '.katapataV21FileOnlyPanel [data-katapata-v21-load], ' +
+      '.katapataV21FileOnlyPanel [data-katapata-v21-pdf]'
+    );
+  }
+
+  function point(event){
+    var touch = event && event.changedTouches && event.changedTouches[0];
+    if (!touch && event && event.touches && event.touches[0]) touch = event.touches[0];
+    return {
+      x: touch ? touch.clientX : (event ? event.clientX : 0),
+      y: touch ? touch.clientY : (event ? event.clientY : 0)
+    };
+  }
+
+  function isLockedStage(button){
+    return !!(button && (
+      button.disabled ||
+      button.hasAttribute('disabled') ||
+      button.classList.contains('prelocked') ||
+      button.classList.contains('locked')
+    ));
+  }
+
+  function renderOutputSoon(){
+    [0, 50, 180].forEach(function(delay){
+      setTimeout(function(){
+        try {
+          if (stage() === 'output' && typeof window.katapataV22RenderOutputPage === 'function') {
+            window.katapataV22RenderOutputPage();
+          }
+        } catch (_) {}
+      }, delay);
+    });
+  }
+
+  function activate(control){
+    if (!control || !document.contains(control)) return;
+    var isStage = control.matches && control.matches('.appStagebar .stage[data-stage]');
+    var wantedStage = isStage ? String(control.getAttribute('data-stage') || '') : '';
+    var beforeStage = stage();
+
+    try {
+      if (typeof control.click === 'function') control.click();
+    } catch (_) {}
+
+    if (isStage && wantedStage && !isLockedStage(control)) {
+      setTimeout(function(){
+        if (stage() !== beforeStage || stage() === wantedStage) return;
+        try {
+          if (typeof window.setStage === 'function') window.setStage(wantedStage);
+        } catch (_) {}
+        try { if (typeof window.render === 'function') window.render(); } catch (_) {}
+        renderOutputSoon();
+      }, 0);
+    } else {
+      renderOutputSoon();
+    }
+  }
+
+  var startTap = null;
+  var lastActivatedAt = 0;
+  var maxMove = 14;
+
+  function rememberStart(event){
+    if (event && event.pointerType && event.pointerType === 'mouse') return;
+    var control = controlFrom(event && event.target);
+    if (!control) {
+      startTap = null;
+      return;
+    }
+    var p = point(event);
+    startTap = { control: control, x: p.x, y: p.y, time: Date.now() };
+  }
+
+  function finishTap(event){
+    if (event && event.pointerType && event.pointerType === 'mouse') return;
+    var control = controlFrom(event && event.target);
+    if (!startTap || !control || control !== startTap.control) return;
+    var p = point(event);
+    var dx = Math.abs(p.x - startTap.x);
+    var dy = Math.abs(p.y - startTap.y);
+    if (dx > maxMove || dy > maxMove) return;
+    var now = Date.now();
+    if (now - lastActivatedAt < 280) return;
+    lastActivatedAt = now;
+    try { event.preventDefault(); } catch (_) {}
+    activate(control);
+  }
+
+  ensureViewport();
+  ensureStyle();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){
+      ensureViewport();
+      ensureStyle();
+    }, { once:true });
+  }
+
+  var hasTouchEvents = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (hasTouchEvents) {
+    document.addEventListener('touchstart', rememberStart, { capture:true, passive:true });
+    document.addEventListener('touchend', finishTap, { capture:true, passive:false });
+  } else {
+    document.addEventListener('pointerdown', rememberStart, true);
+    document.addEventListener('pointerup', finishTap, true);
+  }
+})();
+</script>
 </body></html>
