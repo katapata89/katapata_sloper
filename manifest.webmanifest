@@ -1,0 +1,11 @@
+{
+  "name": "KATAPATA",
+  "short_name": "KATAPATA",
+  "description": "洋裁の原型づくりをブラウザでサポートするツール",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8f5ef",
+  "theme_color": "#f2de95",
+  "lang": "ja"
+}
