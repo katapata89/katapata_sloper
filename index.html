@@ -12,6 +12,13 @@
 :root{--bg:#f8f5ef;--ink:#111;--muted:#9b9084;--line:#000;--paper:#fff;}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body.opening-active{overflow:hidden}.openingOverlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:var(--bg);color:#111;opacity:1;transition:opacity .62s ease}.openingOverlay.is-leaving{opacity:0;pointer-events:none}.openingStage{width:min(100%,980px);min-height:100svh;display:grid;place-items:center;padding:clamp(16px,3.4vw,34px)}.openingIntro{width:min(100%,900px);display:grid;justify-items:center;gap:clamp(16px,3.4vh,30px)}.openingLogo{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:clamp(46px,9.2vw,80px);line-height:1;color:#000;letter-spacing:clamp(2px,.55vw,4px);text-align:center}.openingTagline{margin-top:6px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(12px,2vw,18px);line-height:1.25;font-weight:700;letter-spacing:clamp(1.4px,.32vw,2.6px);text-transform:uppercase;color:#9b9084;text-align:center;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}.openingTagline.show{opacity:1;transform:translateY(0)}.openingLetter{opacity:0;display:inline-block;transform:translateY(20px);animation:openingFadeIn .5s forwards}.openingCanvasWrap{width:min(88vw,800px)}#openingCanvas{display:block;width:100%;height:auto;aspect-ratio:4 / 1}.openingEnter{margin-top:2px;min-width:min(52vw,180px);min-height:44px;font-size:clamp(15px,2.4vw,20px);font-weight:700;letter-spacing:clamp(4px,1vw,6px);color:#000;padding:10px 24px;border:2px solid #000;background:#fff;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease,background .18s ease,color .18s ease,letter-spacing .18s ease;cursor:pointer}.openingEnter.show{opacity:1;transform:translateY(0)}.openingEnter:hover{background:#000;color:#fff;letter-spacing:clamp(5px,1.15vw,8px)}.openingEnter:active{transform:translateY(1px)}.openingEnter:disabled{cursor:default;opacity:.55}.fallback{display:none !important}.fallbackCard{max-width:720px;border:1px solid #e4ded4;border-radius:28px;background:rgba(255,255,255,.7);box-shadow:0 18px 50px rgba(0,0,0,.08);padding:32px;text-align:center}.fallbackCard h1{font-size:clamp(40px,8vw,72px);letter-spacing:.14em;margin:0 0 12px}.fallbackCard p{margin:0 0 22px;line-height:1.8;color:#5d5247;font-weight:700}.fallbackCard a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;background:#171717;color:#fff;text-decoration:none;padding:0 22px;font-weight:900}@media (max-height:520px) and (orientation:landscape){.openingStage{padding:12px 18px}.openingIntro{gap:12px}.openingLogo{font-size:clamp(34px,7vw,56px)}.openingTagline{font-size:clamp(10px,1.85vw,14px)}.openingCanvasWrap{width:min(84vw,720px)}.openingEnter{min-height:38px;padding:8px 20px;font-size:15px}}@keyframes openingFadeIn{to{opacity:1;transform:translateY(0)}}@media (prefers-reduced-motion:reduce){.openingLetter{animation:none;opacity:1;transform:none}.openingTagline{opacity:1;transform:none}.openingOverlay,.openingEnter{transition:none}}
 </style>
+<style id="katapataHomeLanguageChoiceStyle">
+.openingLangChoice{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:-4px}
+.openingLangChoice button{min-width:112px;min-height:38px;border:1px solid #cfc7bc;border-radius:999px;background:#fffdf8;color:#111;font:700 14px/1 Arial,Helvetica,sans-serif;letter-spacing:.02em;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
+.openingLangChoice button.is-active{background:#111;border-color:#111;color:#fff}
+.openingLangChoice button:hover,.openingLangChoice button:focus-visible{transform:translateY(-1px);outline:none}
+@media (max-width:520px){.openingLangChoice{gap:8px}.openingLangChoice button{min-width:96px;min-height:36px;font-size:13px}}
+</style>
 </head>
 <body class="opening-active">
   <div class="openingOverlay" id="openingOverlay" aria-label="KATAPATA opening">
@@ -19,6 +26,10 @@
       <section class="openingIntro">
         <div class="openingLogo" id="openingLogo"></div>
         <div class="openingTagline" id="openingTagline">Automatic Sloper Drafting Tool</div>
+        <div class="openingLangChoice" aria-label="Language">
+          <button class="is-active" type="button" data-home-entry-lang="ja">日本語</button>
+          <button type="button" data-home-entry-lang="en">English</button>
+        </div>
         <div class="openingCanvasWrap"><canvas id="openingCanvas" aria-label="KATAPATA opening animation"></canvas></div>
         <button class="openingEnter" id="openingEnter" type="button">ENTER</button>
       </section>
@@ -40,7 +51,11 @@
   const tagline = document.getElementById("openingTagline");
   const canvas = document.getElementById("openingCanvas");
   const overlay = document.getElementById("openingOverlay");
+  const langButtons = Array.from(document.querySelectorAll("[data-home-entry-lang]"));
   if (!logo || !enter || !tagline || !canvas || !overlay) return;
+
+  const LANG_KEY = "katapata_language_v1";
+  let selectedLang = getSavedLanguage();
 
   const ctx = canvas.getContext("2d");
   const text = "KATAPATA";
@@ -70,6 +85,32 @@
 
   function easeOut(t) {
     return 1 - Math.pow(1 - t, 3);
+  }
+
+  function getSavedLanguage() {
+    try {
+      return localStorage.getItem(LANG_KEY) === "en" ? "en" : "ja";
+    } catch (_) {
+      return "ja";
+    }
+  }
+
+  function saveLanguage(lang) {
+    selectedLang = lang === "en" ? "en" : "ja";
+    try { localStorage.setItem(LANG_KEY, selectedLang); } catch (_) {}
+  }
+
+  function targetForLanguage(lang) {
+    return lang === "en" ? "en/about.html" : "about.html";
+  }
+
+  function updateLanguageChoice() {
+    langButtons.forEach((button) => {
+      const active = button.getAttribute("data-home-entry-lang") === selectedLang;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    enter.dataset.target = targetForLanguage(selectedLang);
   }
 
   function resizeCanvas() {
@@ -297,10 +338,11 @@
   function leaveOpening() {
     cancelAnimationFrame(rafId);
     enter.disabled = true;
+    saveLanguage(selectedLang);
     overlay.classList.add("is-leaving");
     document.body.classList.remove("opening-active");
     setTimeout(() => {
-      window.location.href = "about.html";
+      window.location.href = targetForLanguage(selectedLang);
     }, 220);
   }
 
@@ -310,7 +352,14 @@
   });
 
   enter.addEventListener("click", leaveOpening);
+  langButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      saveLanguage(button.getAttribute("data-home-entry-lang"));
+      updateLanguageChoice();
+    });
+  });
 
+  updateLanguageChoice();
   resizeCanvas();
   draw();
 })();
