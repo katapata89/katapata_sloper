@@ -3,137 +3,366 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>使用例 | KATAPATA</title>
-  <meta name="description" content="KATAPATAの使用例を紹介します。寸法入力、調整、ダーツ移動、PDF出力までの流れを動画で確認できます。">
-  <meta property="og:title" content="使用例 | KATAPATA">
-  <meta property="og:description" content="KATAPATAの使い方を動画で紹介します。">
+  <title>KATAPATA | 洋裁原型・型紙作成サポートツール</title>
+  <meta name="description" content="KATAPATAは、洋裁の原型作成をブラウザ上でサポートするツールです。寸法入力から調整、確認、PDF出力までをわかりやすく進められます。">
+  <meta property="og:title" content="KATAPATA | 洋裁原型・型紙作成サポートツール">
+  <meta property="og:description" content="洋裁の原型作成を、もっとシンプルに。">
   <meta property="og:type" content="website">
-  <link rel="stylesheet" href="../assets/css/site.css">
   <style>
-    .example-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
-    .example-video-card video{display:block;width:100%;margin-top:14px;border:1px solid rgba(0,0,0,.12);border-radius:18px;background:#111;box-shadow:0 14px 30px rgba(0,0,0,.08)}
-    .example-video-card .eyebrow{margin-bottom:8px}
-    .example-video-card h2{margin-top:0}
-    .example-video-card.wide{grid-column:1 / -1}
-    .example-flow-note{margin-top:18px;color:#6d6258;line-height:1.9}
-    @media (max-width:760px){.example-video-grid{grid-template-columns:1fr}.example-video-card.wide{grid-column:auto}}
-  </style>
+:root{--bg:#f8f5ef;--ink:#111;--muted:#9b9084;--line:#000;--paper:#fff;}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body.opening-active{overflow:hidden}.openingOverlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:var(--bg);color:#111;opacity:1;transition:opacity .62s ease}.openingOverlay.is-leaving{opacity:0;pointer-events:none}.openingStage{width:min(100%,980px);min-height:100svh;display:grid;place-items:center;padding:clamp(16px,3.4vw,34px)}.openingIntro{width:min(100%,900px);display:grid;justify-items:center;gap:clamp(16px,3.4vh,30px)}.openingLogo{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:clamp(46px,9.2vw,80px);line-height:1;color:#000;letter-spacing:clamp(2px,.55vw,4px);text-align:center}.openingTagline{margin-top:6px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(12px,2vw,18px);line-height:1.25;font-weight:700;letter-spacing:clamp(1.4px,.32vw,2.6px);text-transform:uppercase;color:#9b9084;text-align:center;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}.openingTagline.show{opacity:1;transform:translateY(0)}.openingLetter{opacity:0;display:inline-block;transform:translateY(20px);animation:openingFadeIn .5s forwards}.openingCanvasWrap{width:min(88vw,800px)}#openingCanvas{display:block;width:100%;height:auto;aspect-ratio:4 / 1}.openingEnter{margin-top:2px;min-width:min(52vw,180px);min-height:44px;font-size:clamp(15px,2.4vw,20px);font-weight:700;letter-spacing:clamp(4px,1vw,6px);color:#000;padding:10px 24px;border:2px solid #000;background:#fff;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease,background .18s ease,color .18s ease,letter-spacing .18s ease;cursor:pointer}.openingEnter.show{opacity:1;transform:translateY(0)}.openingEnter:hover{background:#000;color:#fff;letter-spacing:clamp(5px,1.15vw,8px)}.openingEnter:active{transform:translateY(1px)}.openingEnter:disabled{cursor:default;opacity:.55}.fallback{display:none !important}.fallbackCard{max-width:720px;border:1px solid #e4ded4;border-radius:28px;background:rgba(255,255,255,.7);box-shadow:0 18px 50px rgba(0,0,0,.08);padding:32px;text-align:center}.fallbackCard h1{font-size:clamp(40px,8vw,72px);letter-spacing:.14em;margin:0 0 12px}.fallbackCard p{margin:0 0 22px;line-height:1.8;color:#5d5247;font-weight:700}.fallbackCard a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;background:#171717;color:#fff;text-decoration:none;padding:0 22px;font-weight:900}@media (max-height:520px) and (orientation:landscape){.openingStage{padding:12px 18px}.openingIntro{gap:12px}.openingLogo{font-size:clamp(34px,7vw,56px)}.openingTagline{font-size:clamp(10px,1.85vw,14px)}.openingCanvasWrap{width:min(84vw,720px)}.openingEnter{min-height:38px;padding:8px 20px;font-size:15px}}@keyframes openingFadeIn{to{opacity:1;transform:translateY(0)}}@media (prefers-reduced-motion:reduce){.openingLetter{animation:none;opacity:1;transform:none}.openingTagline{opacity:1;transform:none}.openingOverlay,.openingEnter{transition:none}}
+</style>
+<style id="katapataHomeLanguageChoiceStyle">
+.openingLangChoice{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:-4px}
+.openingLangChoice button{min-width:112px;min-height:38px;border:1px solid #cfc7bc;border-radius:999px;background:#fffdf8;color:#111;font:700 14px/1 Arial,Helvetica,sans-serif;letter-spacing:.02em;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
+.openingLangChoice button.is-active{background:#111;border-color:#111;color:#fff}
+.openingLangChoice button:hover,.openingLangChoice button:focus-visible{transform:translateY(-1px);outline:none}
+@media (max-width:520px){.openingLangChoice{gap:8px}.openingLangChoice button{min-width:96px;min-height:36px;font-size:13px}}
+</style>
 </head>
-<body>
-
-<header class="site-header">
-  <div class="nav-wrap">
-    <a class="brand" href="../index.html" aria-label="KATAPATA home">
-      <span class="brand-title">KATAPATA</span>
-      <span class="brand-sub">Automatic Sloper Drafting Tool</span>
-    </a>
-    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false">MENU</button>
-    <nav class="site-nav" data-site-nav>
-      <a href="../about.html">はじめに</a><a href="../tools/index.html">ツール</a><a href="../guide/index.html">使い方</a><a class="is-active" href="../examples/index.html">使用例</a><a href="../blog/index.html">ブログ</a><a href="../pricing/index.html">料金</a><a href="../help/index.html">FAQ</a>
-
-      <span class="lang-switch" aria-label="Language">
-        <a class="is-active" href="#" lang="ja">日本語</a>
-        <a class="" href="../en/examples/index.html" lang="en">English</a>
-      </span>
-    </nav>
+<body class="opening-active">
+  <div class="openingOverlay" id="openingOverlay" aria-label="KATAPATA opening">
+    <main class="openingStage">
+      <section class="openingIntro">
+        <div class="openingLogo" id="openingLogo"></div>
+        <div class="openingTagline" id="openingTagline">Automatic Sloper Drafting Tool</div>
+        <div class="openingLangChoice" aria-label="Language">
+          <button class="is-active" type="button" data-home-entry-lang="ja">日本語</button>
+          <button type="button" data-home-entry-lang="en">English</button>
+        </div>
+        <div class="openingCanvasWrap"><canvas id="openingCanvas" aria-label="KATAPATA opening animation"></canvas></div>
+        <button class="openingEnter" id="openingEnter" type="button">ENTER</button>
+      </section>
+    </main>
   </div>
-</header>
-<main class="main">
-  <section class="page-hero container">
-    <p class="eyebrow">Examples</p>
-    <h1 class="page-title">使用例</h1>
-    <p class="page-lead">KATAPATAで原型を作成し、調整し、印刷用PDFへ進むまでの流れを紹介します。</p>
-  </section>
 
-  <section class="section container">
-    <h2 class="section-title">操作の流れを動画で見る</h2>
-    <p class="example-flow-note">画面上で寸法を入力し、必要に応じて形を調整しながら、原型を確認していきます。実際の操作感を、短い動画でご覧いただけます。</p>
-    <div class="example-video-grid">
-      <article class="card example-video-card">
-        <p class="eyebrow">Step 01</p>
-        <h2>寸法を入力する</h2>
-        <p>バスト、ウエスト、ヒップ、背丈、袖丈などを入力して、原型づくりを始めます。</p>
-        <video controls playsinline preload="metadata" aria-label="寸法入力の操作動画">
-          <source src="videos/measurement-input.mp4" type="video/mp4">
-          お使いのブラウザは動画再生に対応していません。
-        </video>
-      </article>
+  <main class="fallback" aria-label="KATAPATA entrance fallback">
+    <section class="fallbackCard">
+      <h1>KATAPATA</h1>
+      <p>洋裁の原型作成を、もっとシンプルに。<br>ENTERを押すと、KATAPATAの紹介ページへ進みます。</p>
+      <a href="about.html">はじめに進む</a>
+    </section>
+  </main>
 
-      <article class="card example-video-card">
-        <p class="eyebrow">Step 02</p>
-        <h2>前身頃を調整する</h2>
-        <p>BP位置や肩、脇、ウエストまわりを見ながら、必要な調整を行います。</p>
-        <video controls playsinline preload="metadata" aria-label="前身頃調整の操作動画">
-          <source src="videos/front-bodice-adjustment.mp4" type="video/mp4">
-          お使いのブラウザは動画再生に対応していません。
-        </video>
-      </article>
+  <script>
+(function initKatapataOpening() {
+  const logo = document.getElementById("openingLogo");
+  const enter = document.getElementById("openingEnter");
+  const tagline = document.getElementById("openingTagline");
+  const canvas = document.getElementById("openingCanvas");
+  const overlay = document.getElementById("openingOverlay");
+  const langButtons = Array.from(document.querySelectorAll("[data-home-entry-lang]"));
+  if (!logo || !enter || !tagline || !canvas || !overlay) return;
 
-      <article class="card example-video-card">
-        <p class="eyebrow">Step 03</p>
-        <h2>袖を調整する</h2>
-        <p>袖山や袖幅のバランスを確認しながら、袖原型の形を整えます。</p>
-        <video controls playsinline preload="metadata" aria-label="袖調整の操作動画">
-          <source src="videos/sleeve-adjustment.mp4" type="video/mp4">
-          お使いのブラウザは動画再生に対応していません。
-        </video>
-      </article>
+  const LANG_KEY = "katapata_language_v1";
+  let selectedLang = getSavedLanguage();
 
-      <article class="card example-video-card">
-        <p class="eyebrow">Step 04</p>
-        <h2>パンツ原型を確認する</h2>
-        <p>入力した寸法をもとに、パンツ原型のラインやバランスを確認します。</p>
-        <video controls playsinline preload="metadata" aria-label="パンツ調整の操作動画">
-          <source src="videos/pants-adjustment.mp4" type="video/mp4">
-          お使いのブラウザは動画再生に対応していません。
-        </video>
-      </article>
+  const ctx = canvas.getContext("2d");
+  const text = "KATAPATA";
+  const BASE_WIDTH = 800;
+  const BASE_HEIGHT = 200;
+  const startX = 80;
+  const endX = 720;
+  const rulerY = 123;
+  const drawY = 120;
+  const letterDelay = 0.3;
+  const animDuration = 0.5;
+  const totalLogoTime = (text.length - 1) * letterDelay * 1000 + animDuration * 1000;
 
-      <article class="card example-video-card wide">
-        <p class="eyebrow">Step 05</p>
-        <h2>ダーツ移動を試す</h2>
-        <p>前身頃・後身頃のダーツ移動を試し、製図の変化を画面上で確認できます。</p>
-        <video controls playsinline preload="metadata" aria-label="ダーツ移動の操作動画">
-          <source src="videos/dart-transfer.mp4" type="video/mp4">
-          お使いのブラウザは動画再生に対応していません。
-        </video>
-      </article>
-    </div>
-  </section>
+  let progress = 0;
+  let state = "waiting";
+  let pauseFrames = 0;
+  let startTime = performance.now();
+  let rafId = 0;
 
-  <section class="section container">
-    <h2 class="section-title">PDF出力について</h2>
-    <div class="grid two">
-      <article class="card">
-        <p class="eyebrow">Free</p>
-        <h2>縮小サンプルPDFで確認</h2>
-        <p>無料の縮小サンプルPDFで、製図内容や全体のバランスを確認できます。実寸利用ではなく、内容確認用のPDFです。</p>
-      </article>
-      <article class="card featured">
-        <p class="eyebrow">Paid</p>
-        <h2>印刷用PDFとして出力</h2>
-        <p>有料出力では、購入時点で確定しているデータをもとに、通常サイズPDFとA4分割PDFを出力できます。</p>
-      </article>
-    </div>
-  </section>
+  text.split("").forEach((char, index) => {
+    const span = document.createElement("span");
+    span.textContent = char;
+    span.className = "openingLetter";
+    span.style.animationDelay = `${index * letterDelay}s`;
+    logo.appendChild(span);
+  });
 
-  <section class="section container">
-    <div class="guide-callout small">
-      <div>
-        <h2>まずは画面上で原型を確認できます</h2>
-        <p>寸法入力から調整、確認まではブラウザ上で進められます。PDF出力が必要になったタイミングで購入へ進めます。</p>
-      </div>
-      <a class="btn primary" href="../tools/sloper/index.html">原型づくりをはじめる</a>
-    </div>
-  </section>
-</main>
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div><strong>KATAPATA</strong><br>洋裁の原型作成を、もっとわかりやすく。</div>
-    <div>© KATAPATA.</div>
-  </div>
-</footer>
-<script src="../assets/js/site.js"></script>
+  function getSavedLanguage() {
+    try {
+      return localStorage.getItem(LANG_KEY) === "en" ? "en" : "ja";
+    } catch (_) {
+      return "ja";
+    }
+  }
+
+  function saveLanguage(lang) {
+    selectedLang = lang === "en" ? "en" : "ja";
+    try { localStorage.setItem(LANG_KEY, selectedLang); } catch (_) {}
+  }
+
+  function targetForLanguage(lang) {
+    return lang === "en" ? "en/about.html" : "about.html";
+  }
+
+  function updateLanguageChoice() {
+    langButtons.forEach((button) => {
+      const active = button.getAttribute("data-home-entry-lang") === selectedLang;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    enter.dataset.target = targetForLanguage(selectedLang);
+  }
+
+  function resizeCanvas() {
+    const logoWidth = Math.ceil(logo.getBoundingClientRect().width || 0);
+    const viewportLimit = Math.floor(window.innerWidth * 0.88);
+    const targetWidth = Math.round(Math.min(BASE_WIDTH, viewportLimit, Math.max(260, logoWidth + Math.max(0, viewportLimit - logoWidth) * 0.5)));
+    if (canvas.parentElement) {
+      canvas.parentElement.style.width = `${targetWidth}px`;
+    }
+
+    const cssWidth = targetWidth;
+    const cssHeight = cssWidth * (BASE_HEIGHT / BASE_WIDTH);
+    const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
+
+    canvas.width = Math.round(cssWidth * dpr);
+    canvas.height = Math.round(cssHeight * dpr);
+    canvas.style.width = `${cssWidth}px`;
+    canvas.style.height = `${cssHeight}px`;
+
+    const scale = cssWidth / BASE_WIDTH;
+    ctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+  }
+
+  function makeSeeded(seed) {
+    let s = seed >>> 0;
+    return () => {
+      s = (1664525 * s + 1013904223) >>> 0;
+      return s / 4294967296;
+    };
+  }
+
+  function buildStroke(seed, amplitude, gapChance) {
+    const rand = makeSeeded(seed);
+    const pts = [];
+    let y = drawY;
+    for (let x = startX; x <= endX; x += 1) {
+      y += (rand() - 0.5) * 0.16;
+      y += Math.sin((x + seed) * 0.035) * 0.012;
+      y = Math.max(drawY - amplitude, Math.min(drawY + amplitude, y));
+      pts.push({ x, y, draw: rand() > gapChance });
+    }
+    return {
+      points: pts,
+      width: 0.65 + rand() * 0.16,
+      alpha: 0.16 + rand() * 0.08,
+    };
+  }
+
+  const pencilStrokes = [
+    buildStroke(18, 0.36, 0.006),
+    buildStroke(77, 0.28, 0.01),
+  ];
+
+  function drawRuler() {
+    ctx.strokeStyle = "#171717";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(startX, rulerY);
+    ctx.lineTo(endX, rulerY);
+    ctx.stroke();
+
+    for (let i = startX; i <= endX; i += 10) {
+      const h = (i % 50 === 0) ? 12 : 6;
+      ctx.beginPath();
+      ctx.moveTo(i, rulerY);
+      ctx.lineTo(i, rulerY + h);
+      ctx.stroke();
+    }
+  }
+
+  function drawAccumulatedLine(currentX) {
+    const clampedX = Math.max(startX, Math.min(endX, Math.floor(currentX)));
+    if (clampedX <= startX) return;
+
+    ctx.beginPath();
+    ctx.moveTo(startX, drawY);
+    ctx.lineTo(clampedX, drawY);
+    ctx.strokeStyle = "rgba(20, 20, 20, 0.56)";
+    ctx.lineWidth = 1.25;
+    ctx.stroke();
+
+    for (const stroke of pencilStrokes) {
+      ctx.beginPath();
+      let started = false;
+      for (const pt of stroke.points) {
+        if (pt.x > clampedX) break;
+        if (pt.draw) {
+          if (!started) {
+            ctx.moveTo(pt.x, pt.y);
+            started = true;
+          } else {
+            ctx.lineTo(pt.x, pt.y);
+          }
+        } else {
+          started = false;
+        }
+      }
+      ctx.strokeStyle = `rgba(40, 40, 40, ${stroke.alpha})`;
+      ctx.lineWidth = stroke.width;
+      ctx.stroke();
+    }
+  }
+
+  function drawRealPencil(x, y, nowMs) {
+    ctx.save();
+
+    let lift = 0;
+    let driftX = 0;
+    if (state === "lift") {
+      const t = Math.min((progress - 1) * 2, 1);
+      const easedLift = 1 - Math.pow(1 - t, 2);
+      lift = easedLift * 120;
+      driftX = t * 30;
+    }
+
+    ctx.translate(x + driftX, y - lift * 0.4);
+    ctx.scale(-1, 1);
+
+    let baseAngle = 0.6 + Math.sin(nowMs * 0.012) * 0.012;
+    if (state === "lift") {
+      const t = Math.min((progress - 1) * 2, 1);
+      baseAngle += t * 0.2;
+    }
+
+    ctx.rotate(baseAngle);
+    ctx.shadowColor = "rgba(0,0,0,0.15)";
+    ctx.shadowBlur = 3;
+
+    ctx.fillStyle = "#2a2a2a";
+    ctx.beginPath();
+    ctx.moveTo(-40, -7);
+    ctx.lineTo(-10, -7);
+    ctx.lineTo(0, 0);
+    ctx.lineTo(-10, 7);
+    ctx.lineTo(-40, 7);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = "rgba(255,255,255,0.08)";
+    ctx.fillRect(-38, -6, 20, 2);
+
+    ctx.save();
+    ctx.scale(-1, 1);
+    ctx.fillStyle = "rgba(255,255,255,0.6)";
+    ctx.font = "10px sans-serif";
+    ctx.fillText("HB", -32, 3);
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.moveTo(-10, -7);
+    ctx.lineTo(-4, -7);
+    ctx.lineTo(6, 0);
+    ctx.lineTo(-4, 7);
+    ctx.lineTo(-10, 7);
+    ctx.fillStyle = "#5a4a3a";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(-4, -4);
+    ctx.lineTo(6, 0);
+    ctx.lineTo(-4, 4);
+    ctx.fillStyle = "#111";
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  function draw() {
+    const now = performance.now();
+    const elapsed = now - startTime;
+
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+    ctx.fillStyle = "#f8f5ef";
+    ctx.fillRect(0, 0, BASE_WIDTH, BASE_HEIGHT);
+
+    if (state === "waiting" && elapsed > totalLogoTime) {
+      state = "drawing";
+      tagline.classList.add("show");
+    }
+
+    const eased = easeOut(Math.min(progress, 1));
+    let currentX = startX + (endX - startX) * eased;
+    const snap = Math.round(currentX / 10) * 10;
+    currentX = currentX * 0.9 + snap * 0.1;
+
+    if (state !== "waiting") {
+      drawRuler();
+      drawAccumulatedLine(currentX);
+      drawRealPencil(currentX, drawY, now);
+    }
+
+    if (state === "drawing") {
+      progress += progress < 0.7 ? 0.004 : 0.0032;
+      if (progress >= 1) {
+        progress = 1;
+        state = "pause";
+      }
+    } else if (state === "pause") {
+      pauseFrames++;
+      if (pauseFrames > 6) state = "lift";
+    } else if (state === "lift") {
+      progress += 0.02;
+      if (progress > 1.3) {
+        enter.classList.add("show");
+      }
+    }
+
+    if (!(state === "lift" && progress > 1.6)) {
+      rafId = requestAnimationFrame(draw);
+    }
+  }
+
+  function redrawFinishedLine() {
+    ctx.fillStyle = "#f8f5ef";
+    ctx.fillRect(0, 0, BASE_WIDTH, BASE_HEIGHT);
+    drawRuler();
+    drawAccumulatedLine(endX);
+  }
+
+  function leaveOpening() {
+    cancelAnimationFrame(rafId);
+    enter.disabled = true;
+    saveLanguage(selectedLang);
+    overlay.classList.add("is-leaving");
+    document.body.classList.remove("opening-active");
+    setTimeout(() => {
+      window.location.href = targetForLanguage(selectedLang);
+    }, 220);
+  }
+
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    if (state === "lift" && progress > 1.6) redrawFinishedLine();
+  });
+
+  enter.addEventListener("click", leaveOpening);
+  langButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      saveLanguage(button.getAttribute("data-home-entry-lang"));
+      updateLanguageChoice();
+    });
+  });
+
+  updateLanguageChoice();
+  resizeCanvas();
+  draw();
+})();
+</script>
 </body>
 </html>
