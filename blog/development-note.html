@@ -1,43 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KATAPATAをサイト化していく理由 | KATAPATA</title>
-  <meta name="description" content="1ファイル版を残しながら、サイトとして分けていく考え方をまとめます。">
-  <meta property="og:title" content="KATAPATAをサイト化していく理由 | KATAPATA">
-  <meta property="og:description" content="1ファイル版を残しながら、サイトとして分けていく考え方をまとめます。">
-  <meta property="og:type" content="website">
-  <link rel="stylesheet" href="../assets/css/site.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>KATAPATAをサイト化していく理由 | KATAPATA</title>
+<meta content="KATAPATAを1ページのツールだけでなく、使い方・FAQ・料金・ブログを分けたサイトとして整えていく理由をまとめます。" name="description"/>
+<meta content="KATAPATAをサイト化していく理由 | KATAPATA" property="og:title"/>
+<meta content="KATAPATAを1ページのツールだけでなく、使い方・FAQ・料金・ブログを分けたサイトとして整えていく理由をまとめます。" property="og:description"/>
+<meta content="website" property="og:type"/>
+<link href="../assets/css/site.css" rel="stylesheet"/>
 </head>
 <body>
-
 <header class="site-header">
-  <div class="nav-wrap">
-    <a class="brand" href="../index.html" aria-label="KATAPATA home">
-      <span class="brand-title">KATAPATA</span>
-      <span class="brand-sub">Automatic Sloper Drafting Tool</span>
-    </a>
-    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false">MENU</button>
-    <nav class="site-nav" data-site-nav>
-      <a href="../about.html">はじめに</a><a href="../tools/index.html">ツール</a><a href="../guide/index.html">使い方</a><a href="../examples/index.html">使用例</a><a class="is-active" href="../blog/index.html">ブログ</a><a href="../pricing/index.html">料金</a><a href="../help/index.html">FAQ</a>
-      
-      <span class="lang-switch" aria-label="Language">
-        <a class="is-active" href="#" lang="ja">日本語</a>
-        <a class="" href="../en/blog/development-note.html" lang="en">English</a>
-      </span>
-    </nav>
-  </div>
+<div class="nav-wrap">
+<a aria-label="KATAPATA home" class="brand" href="../index.html">
+<span class="brand-title">KATAPATA</span>
+<span class="brand-sub">Automatic Sloper Drafting Tool</span>
+</a>
+<button aria-expanded="false" class="nav-toggle" data-nav-toggle="" type="button">MENU</button>
+<nav class="site-nav" data-site-nav="">
+<a href="../about.html">はじめに</a><a href="../tools/index.html">ツール</a><a href="../guide/index.html">使い方</a><a href="../examples/index.html">使用例</a><a class="is-active" href="../blog/index.html">ブログ</a><a href="../pricing/index.html">料金</a><a href="../help/index.html">FAQ</a>
+<span aria-label="Language" class="lang-switch">
+<a class="is-active" href="#" lang="ja">日本語</a>
+<a class="" href="../en/blog/development-note.html" lang="en">English</a>
+</span>
+</nav>
+</div>
 </header>
 <main class="main">
-<section class="article-body container"><p class="eyebrow">Dev Note</p><h1>KATAPATAをサイト化していく理由</h1><p>1ファイル版を残しながら、サイトとして分けていく考え方をまとめます。</p><h2>メモ</h2><p>KATAPATAでは、原型づくりを「入力する」「画面で確認する」「必要なら調整する」「PDFで出力する」という流れに整理しています。この記事は、公開前に内容を増やしていくための下書きページです。</p><p class="back-link"><a class="btn ghost" href="index.html">ブログ一覧へ戻る</a></p></section>
+<section class="article-body container">
+<p class="eyebrow">Dev Note</p>
+<h1>KATAPATAをサイト化していく理由</h1>
+<p>KATAPATAは、もともと「寸法を入れて、原型を作って、PDFで出力する」ためのツールとして作り始めました。けれど、実際に公開に近づくほど、ツール本体だけでは伝えきれないことが増えてきました。</p>
+<h2>ツールと説明を分けるため</h2>
+<p>原型とは何か、縮小サンプルPDFとは何か、印刷前に何を確認すればよいか。こうした説明をツール画面の中に全部入れてしまうと、肝心の操作画面が読みにくくなってしまいます。</p>
+<p>そこで、ツール本体はできるだけシンプルに保ち、詳しい説明はサイト内のガイドやブログに分けることにしました。</p>
+<h2>初めて使う人が迷わないように</h2>
+<p>KATAPATAは、洋裁に慣れている方にも、原型づくりをこれから試してみたい方にも使ってもらえるようにしたいと考えています。</p>
+<p>そのためには、いきなり入力画面だけを見せるのではなく、「何ができるのか」「どこまでが無料で確認できるのか」「PDFはどう使うのか」が自然にわかる場所が必要でした。</p>
+<h2>あとから更新しやすくするため</h2>
+<p>料金、FAQ、印刷の注意点、使い方の説明は、公開後も少しずつ見直していく部分です。ページを分けておくことで、必要なところだけを直しやすくなります。</p>
+<p>また、日本語ページと英語ページを分けて整えることで、海外の方にも内容を伝えやすくなります。</p>
+<h2>KATAPATAらしいサイトにしていく</h2>
+<p>ただ機能を並べるだけではなく、原型づくりへの不安が少し軽くなるような、落ち着いて読めるサイトにしていきたいと思っています。</p>
+<p>小さなメモのような記事も増やしながら、KATAPATAを使う前後の疑問に答えられる場所にしていきます。</p>
+<p class="back-link"><a class="btn ghost" href="index.html">ブログ一覧へ戻る</a></p>
+</section>
 </main>
-
 <footer class="footer">
-  <div class="footer-inner">
-    <div><strong>KATAPATA</strong><br>洋裁の原型作成を、もっとわかりやすく。</div>
-    <div>© KATAPATA.</div>
-  </div>
+<div class="footer-inner">
+<div><strong>KATAPATA</strong><br/>洋裁の原型作成を、もっとわかりやすく。</div>
+<div>© KATAPATA.</div>
+</div>
 </footer>
 <script src="../assets/js/site.js"></script>
 </body>
