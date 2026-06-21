@@ -4,11 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>使用例 | KATAPATA</title>
-  <meta name="description" content="KATAPATAの使用例を紹介します。">
+  <meta name="description" content="KATAPATAの使用例を紹介します。寸法入力、調整、ダーツ移動、PDF出力までの流れを動画で確認できます。">
   <meta property="og:title" content="使用例 | KATAPATA">
-  <meta property="og:description" content="KATAPATAの使用例を紹介します。">
+  <meta property="og:description" content="KATAPATAの使い方を動画で紹介します。">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    .example-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+    .example-video-card video{display:block;width:100%;margin-top:14px;border:1px solid rgba(0,0,0,.12);border-radius:18px;background:#111;box-shadow:0 14px 30px rgba(0,0,0,.08)}
+    .example-video-card .eyebrow{margin-bottom:8px}
+    .example-video-card h2{margin-top:0}
+    .example-video-card.wide{grid-column:1 / -1}
+    .example-flow-note{margin-top:18px;color:#6d6258;line-height:1.9}
+    @media (max-width:760px){.example-video-grid{grid-template-columns:1fr}.example-video-card.wide{grid-column:auto}}
+  </style>
 </head>
 <body>
 
@@ -30,7 +39,93 @@
   </div>
 </header>
 <main class="main">
-<section class="page-hero container"><p class="eyebrow">Examples</p><h1 class="page-title">使用例</h1><p class="page-lead">KATAPATAの使い方を、かんたんに紹介します。スクリーンショットや印刷例、作品写真などは、あとから追加できます。</p></section><section class="section container"><div class="grid two"><article class="card"><p class="eyebrow">Example 01</p><h2>婦人原型を作る</h2><p>必要な寸法を入力して、身頃と袖の原型を作成できます。製図を確定する前に、調整やダーツ移動を試すこともできます。</p></article><article class="card"><p class="eyebrow">Example 02</p><h2>ボトムス原型を確認する</h2><p>入力した寸法から、スカート原型とパンツ原型をプレビューできます。</p></article><article class="card"><p class="eyebrow">Example 03</p><h2>サンプルPDFで確認する</h2><p>無料の縮小サンプルPDFを使って、製図内容や全体のバランスを確認できます。</p></article><article class="card"><p class="eyebrow">Example 04</p><h2>印刷用PDFを使う</h2><p>有料出力では、購入時点で確定しているデータをもとに、通常サイズPDFとA4分割PDFを出力できます。</p></article></div></section>
+  <section class="page-hero container">
+    <p class="eyebrow">Examples</p>
+    <h1 class="page-title">使用例</h1>
+    <p class="page-lead">KATAPATAで原型を作成し、調整し、印刷用PDFへ進むまでの流れを紹介します。</p>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">操作の流れを動画で見る</h2>
+    <p class="example-flow-note">画面上で寸法を入力し、必要に応じて形を調整しながら、原型を確認していきます。実際の操作感を、短い動画でご覧いただけます。</p>
+    <div class="example-video-grid">
+      <article class="card example-video-card">
+        <p class="eyebrow">Step 01</p>
+        <h2>寸法を入力する</h2>
+        <p>バスト、ウエスト、ヒップ、背丈、袖丈などを入力して、原型づくりを始めます。</p>
+        <video controls playsinline preload="metadata" aria-label="寸法入力の操作動画">
+          <source src="videos/measurement-input.mp4" type="video/mp4">
+          お使いのブラウザは動画再生に対応していません。
+        </video>
+      </article>
+
+      <article class="card example-video-card">
+        <p class="eyebrow">Step 02</p>
+        <h2>前身頃を調整する</h2>
+        <p>BP位置や肩、脇、ウエストまわりを見ながら、必要な調整を行います。</p>
+        <video controls playsinline preload="metadata" aria-label="前身頃調整の操作動画">
+          <source src="videos/front-bodice-adjustment.mp4" type="video/mp4">
+          お使いのブラウザは動画再生に対応していません。
+        </video>
+      </article>
+
+      <article class="card example-video-card">
+        <p class="eyebrow">Step 03</p>
+        <h2>袖を調整する</h2>
+        <p>袖山や袖幅のバランスを確認しながら、袖原型の形を整えます。</p>
+        <video controls playsinline preload="metadata" aria-label="袖調整の操作動画">
+          <source src="videos/sleeve-adjustment.mp4" type="video/mp4">
+          お使いのブラウザは動画再生に対応していません。
+        </video>
+      </article>
+
+      <article class="card example-video-card">
+        <p class="eyebrow">Step 04</p>
+        <h2>パンツ原型を確認する</h2>
+        <p>入力した寸法をもとに、パンツ原型のラインやバランスを確認します。</p>
+        <video controls playsinline preload="metadata" aria-label="パンツ調整の操作動画">
+          <source src="videos/pants-adjustment.mp4" type="video/mp4">
+          お使いのブラウザは動画再生に対応していません。
+        </video>
+      </article>
+
+      <article class="card example-video-card wide">
+        <p class="eyebrow">Step 05</p>
+        <h2>ダーツ移動を試す</h2>
+        <p>前身頃・後身頃のダーツ移動を試し、製図の変化を画面上で確認できます。</p>
+        <video controls playsinline preload="metadata" aria-label="ダーツ移動の操作動画">
+          <source src="videos/dart-transfer.mp4" type="video/mp4">
+          お使いのブラウザは動画再生に対応していません。
+        </video>
+      </article>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2 class="section-title">PDF出力について</h2>
+    <div class="grid two">
+      <article class="card">
+        <p class="eyebrow">Free</p>
+        <h2>縮小サンプルPDFで確認</h2>
+        <p>無料の縮小サンプルPDFで、製図内容や全体のバランスを確認できます。実寸利用ではなく、内容確認用のPDFです。</p>
+      </article>
+      <article class="card featured">
+        <p class="eyebrow">Paid</p>
+        <h2>印刷用PDFとして出力</h2>
+        <p>有料出力では、購入時点で確定しているデータをもとに、通常サイズPDFとA4分割PDFを出力できます。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="guide-callout small">
+      <div>
+        <h2>まずは画面上で原型を確認できます</h2>
+        <p>寸法入力から調整、確認まではブラウザ上で進められます。PDF出力が必要になったタイミングで購入へ進めます。</p>
+      </div>
+      <a class="btn primary" href="../tools/sloper/index.html">原型づくりをはじめる</a>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
