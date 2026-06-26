@@ -5,9 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KATAPATA | 洋裁原型・型紙作成サポートツール</title>
   <meta name="description" content="KATAPATAは、洋裁の原型作成をブラウザ上でサポートするツールです。寸法入力から調整、確認、PDF出力までをわかりやすく進められます。">
+
   <meta property="og:title" content="KATAPATA | 洋裁原型・型紙作成サポートツール">
   <meta property="og:description" content="洋裁の原型作成を、もっとシンプルに。">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://katapata-sloper.vercel.app/">
+  <meta property="og:image" content="https://katapata-sloper.vercel.app/ogp.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="KATAPATA - 洋裁原型・型紙作成サポートツール">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KATAPATA | 洋裁原型・型紙作成サポートツール">
+  <meta name="twitter:description" content="洋裁の原型作成を、もっとシンプルに。">
+  <meta name="twitter:image" content="https://katapata-sloper.vercel.app/ogp.png">
+
   <style>
 :root{--bg:#f8f5ef;--ink:#111;--muted:#9b9084;--line:#000;--paper:#fff;}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body.opening-active{overflow:hidden}.openingOverlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:var(--bg);color:#111;opacity:1;transition:opacity .62s ease}.openingOverlay.is-leaving{opacity:0;pointer-events:none}.openingStage{width:min(100%,980px);min-height:100svh;display:grid;place-items:center;padding:clamp(16px,3.4vw,34px)}.openingIntro{width:min(100%,900px);display:grid;justify-items:center;gap:clamp(16px,3.4vh,30px)}.openingLogo{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:clamp(46px,9.2vw,80px);line-height:1;color:#000;letter-spacing:clamp(2px,.55vw,4px);text-align:center}.openingTagline{margin-top:6px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(12px,2vw,18px);line-height:1.25;font-weight:700;letter-spacing:clamp(1.4px,.32vw,2.6px);text-transform:uppercase;color:#9b9084;text-align:center;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}.openingTagline.show{opacity:1;transform:translateY(0)}.openingLetter{opacity:0;display:inline-block;transform:translateY(20px);animation:openingFadeIn .5s forwards}.openingCanvasWrap{width:min(88vw,800px)}#openingCanvas{display:block;width:100%;height:auto;aspect-ratio:4 / 1}.openingEnter{margin-top:2px;min-width:min(52vw,180px);min-height:44px;font-size:clamp(15px,2.4vw,20px);font-weight:700;letter-spacing:clamp(4px,1vw,6px);color:#000;padding:10px 24px;border:2px solid #000;background:#fff;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease,background .18s ease,color .18s ease,letter-spacing .18s ease;cursor:pointer}.openingEnter.show{opacity:1;transform:translateY(0)}.openingEnter:hover{background:#000;color:#fff;letter-spacing:clamp(5px,1.15vw,8px)}.openingEnter:active{transform:translateY(1px)}.openingEnter:disabled{cursor:default;opacity:.55}.fallback{display:none !important}.fallbackCard{max-width:720px;border:1px solid #e4ded4;border-radius:28px;background:rgba(255,255,255,.7);box-shadow:0 18px 50px rgba(0,0,0,.08);padding:32px;text-align:center}.fallbackCard h1{font-size:clamp(40px,8vw,72px);letter-spacing:.14em;margin:0 0 12px}.fallbackCard p{margin:0 0 22px;line-height:1.8;color:#5d5247;font-weight:700}.fallbackCard a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;background:#171717;color:#fff;text-decoration:none;padding:0 22px;font-weight:900}@media (max-height:520px) and (orientation:landscape){.openingStage{padding:12px 18px}.openingIntro{gap:12px}.openingLogo{font-size:clamp(34px,7vw,56px)}.openingTagline{font-size:clamp(10px,1.85vw,14px)}.openingCanvasWrap{width:min(84vw,720px)}.openingEnter{min-height:38px;padding:8px 20px;font-size:15px}}@keyframes openingFadeIn{to{opacity:1;transform:translateY(0)}}@media (prefers-reduced-motion:reduce){.openingLetter{animation:none;opacity:1;transform:none}.openingTagline{opacity:1;transform:none}.openingOverlay,.openingEnter{transition:none}}
